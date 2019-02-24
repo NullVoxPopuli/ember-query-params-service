@@ -19,7 +19,6 @@ const queryParamHandler = {
     let query = qs.stringify({ ...obj, [key]: value });
     let newUrl = `${protocol}//${host}${pathname}?${query}`;
 
-    console.log('pushing state...');
     window.history.pushState({ path: newUrl }, '', newUrl);
 
     return Reflect.set(obj, key, value, ...rest);
