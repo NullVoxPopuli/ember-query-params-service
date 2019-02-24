@@ -1,14 +1,14 @@
 ember-query-params-service
 ==============================================================================
 
-[Short description of the addon.]
+[![Build Status](https://travis-ci.com/NullVoxPopuli/ember-query-params-service.svg?branch=master)](https://travis-ci.com/NullVoxPopuli/ember-query-params-service)
 
 
 Compatibility
 ------------------------------------------------------------------------------
 
-* Ember.js v2.18 or above
-* Ember CLI v2.13 or above
+* Ember.js v3.9 or above
+* Ember CLI v3.9 or above
 
 
 Installation
@@ -22,7 +22,34 @@ ember install ember-query-params-service
 Usage
 ------------------------------------------------------------------------------
 
-[Longer description of how to use the addon in apps.]
+```ts
+import Route from '@ember/routing/route';
+import { inject as service } from '@ember/service';
+import QueryParamsService from 'ember-query-params-service/src/services/query-params';
+
+export default class ApplicationRoute extends Route {
+  @service queryParams!: QueryParamsService;
+
+  model() {
+    return {
+      QPs: JSON.stringify(this.queryParams.current),
+    }
+  }
+}
+```
+
+```hbs
+{{this.model.QPs}}
+```
+
+and then visiting `/?a=1&b=2` will show:
+
+```
+{ 
+  a: 1,
+  b: 2
+}
+```
 
 
 Contributing
