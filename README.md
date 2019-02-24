@@ -50,6 +50,21 @@ and then visiting `/?a=1&b=2` will show:
 }
 ```
 
+### **Setting Query Params**
+
+```ts
+  @service queryParams;
+
+  // ...somewhere
+  this.queryParams.current.queryParamName = 'some value';
+```
+and then the URL will show `queryParamName=some%20value`
+
+## API
+
+ - `queryParams.current` - the current set of query params for the currentURL
+
+ - `queryParams.byPath` - query params for every route that has been visited since the last refresh
 
 Contributing
 ------------------------------------------------------------------------------
