@@ -1,8 +1,8 @@
 import Service, { inject as service } from '@ember/service';
-import { tracked } from '@glimmer/tracking';
-import { observes } from '@ember-decorators/object';
-import * as qs from 'qs';
 import RouterService from '@ember/routing/router-service';
+
+import { tracked } from '@glimmer/tracking';
+import * as qs from 'qs';
 
 interface QueryParams {
   [key: string]: number | string | undefined | QueryParams;
@@ -40,12 +40,10 @@ export default class QueryParamsService extends Service {
 
   init() {
     this.updateParams();
-  }
 
-  // For when ember wants to make a change to the route
-  @observes('router.currentURL')
-  urlObserver() {
-    this.updateParams();
+    this.router.on('routeDidChange', (_transition: TransitionEvent) => {
+      this.updateParams();
+    });
   }
 
   private setupProxies() {
@@ -53,9 +51,10 @@ export default class QueryParamsService extends Service {
   }
 
   private updateParams() {
-    const [path, params] = this.router.currentURL.split('?');
+    const [path, params] = (this.router.currentURL || '').split('?');
     const queryParams = params && qs.parse(params);
 
+    // debugger;
     Object.keys(queryParams || {}).forEach(key => {
       let value = queryParams[key];
       let currentValue = this.current[key];
@@ -69,5 +68,13 @@ export default class QueryParamsService extends Service {
 
 
     this.byPath[path] = this.current;
+  }
+}
+
+
+// DO NOT DELETE: this is how TypeScript knows how to look up your services.
+declare module '@ember/service' {
+  interface Registry {
+    'query-params': QueryParams;
   }
 }

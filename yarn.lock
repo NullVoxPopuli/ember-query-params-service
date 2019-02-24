@@ -3831,7 +3831,7 @@ ember-assign-polyfill@^2.6.0:
     ember-cli-babel "^6.16.0"
     ember-cli-version-checker "^2.0.0"
 
-ember-auto-import@^1.2.20:
+ember-auto-import@^1.2.21:
   version "1.2.21"
   resolved "https://registry.yarnpkg.com/ember-auto-import/-/ember-auto-import-1.2.21.tgz#e02ded183844faba66c3f2af97028ef35175b837"
   integrity sha512-coHnqO3mRnlj/JAQSQBEqzX2wL8rH5YrfEJMzk1102X9MdSX1CWeaUYBcyjvI/pG8fHUhv+4VsD6rQuhTUyZUQ==
