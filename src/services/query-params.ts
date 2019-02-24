@@ -28,7 +28,6 @@ const queryParamHandler = {
 export default class QueryParamsService extends Service {
   @service router!: RouterService;
 
-  _current: QueryParams = {};
   @tracked current!: QueryParams;
   @tracked byPath: QueryParamsByPath = {};
 
@@ -41,33 +40,44 @@ export default class QueryParamsService extends Service {
   init() {
     this.updateParams();
 
-    this.router.on('routeDidChange', (_transition: TransitionEvent) => {
-      this.updateParams();
-    });
+    this.router.on('routeDidChange', () => this.updateParams());
+    this.router.on('routeWillChange', () => this.updateParams());
+  }
+
+  get pathParts() {
+    const [path, params] = (this.router.currentURL || '').split('?');
+
+    return [path, params];
   }
 
   private setupProxies() {
-    this.current = new Proxy(this._current, queryParamHandler);
+    let [path, _params] = this.pathParts;
+
+    this.byPath[path] = {};
+
+    this.current = new Proxy(this.byPath[path], queryParamHandler);
   }
 
   private updateParams() {
-    const [path, params] = (this.router.currentURL || '').split('?');
+    this.setupProxies();
+
+    const [path, params] = this.pathParts;
     const queryParams = params && qs.parse(params);
 
-    // debugger;
     Object.keys(queryParams || {}).forEach(key => {
       let value = queryParams[key];
-      let currentValue = this.current[key];
+      let currentValue = this.byPath[path][key];
 
       if (currentValue === value) {
         return;
       }
 
-      this.current[key] = value;
+      this.byPath[path][key] = value;
     });
 
+    this.current = this.byPath[path];
+    console.log('updating?', this.current, this.byPath);
 
-    this.byPath[path] = this.current;
   }
 }
 
