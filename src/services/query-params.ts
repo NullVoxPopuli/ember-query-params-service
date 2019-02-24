@@ -19,6 +19,7 @@ const queryParamHandler = {
     let query = qs.stringify({ ...obj, [key]: value });
     let newUrl = `${protocol}//${host}${pathname}?${query}`;
 
+    console.log('pushing state...');
     window.history.pushState({ path: newUrl }, '', newUrl);
 
     return Reflect.set(obj, key, value, ...rest);
@@ -53,7 +54,7 @@ export default class QueryParamsService extends Service {
   private setupProxies() {
     let [path, _params] = this.pathParts;
 
-    this.byPath[path] = {};
+    this.byPath[path] = this.byPath[path] || {};
 
     this.current = new Proxy(this.byPath[path], queryParamHandler);
   }
@@ -74,10 +75,6 @@ export default class QueryParamsService extends Service {
 
       this.byPath[path][key] = value;
     });
-
-    this.current = this.byPath[path];
-    console.log('updating?', this.current, this.byPath);
-
   }
 }
 
