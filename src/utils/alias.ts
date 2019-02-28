@@ -4,20 +4,20 @@ export function alias<T>(propertyPath: string) {
   return (desc: IMethodDecorator): ElementDescriptor => {
     const result: ElementDescriptor = {
       ...desc,
-      kind: 'method',
+      kind: "method",
       descriptor: {
         enumerable: false,
-        configurable: false,
-      },
+        configurable: false
+      }
     };
 
-    result.descriptor.get = function (): T {
-      return get(this, propertyPath);
+    result.descriptor.get = function(): T {
+      return get(this as Dict, propertyPath) as T;
     };
-    result.descriptor.set = function (value: any) {
-      set(this, propertyPath, value);
+    result.descriptor.set = function(value: any) {
+      set(this as Dict, propertyPath, value);
     };
 
     return result;
-  }
+  };
 }

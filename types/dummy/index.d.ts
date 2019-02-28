@@ -14,3 +14,7 @@ interface IMethodDecorator {
   kind: 'method' | 'field' | 'initializer';
   placement: 'own' | 'prototype' | 'static';
 }
+
+type Dict<T = unknown> = {
+  [key: string]: T
+};
