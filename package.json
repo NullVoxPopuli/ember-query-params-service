@@ -1,10 +1,10 @@
 {
   "name": "ember-query-params-service",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "keywords": [
     "ember-addon"
   ],
-  "private": true,
+  "private": false,
   "description": "Small description for ember-query-params-service goes here",
   "repository": "",
   "license": "MIT",
@@ -64,6 +64,9 @@
     "loader.js": "^4.7.0",
     "qunit-dom": "^0.8.0",
     "typescript": "^3.3.3333"
+  },
+  "resolutions": {
+    "@types/handlebars": "npm:handlebars"
   },
   "engines": {
     "node": "6.* || 8.* || >= 10.*"
