@@ -12,10 +12,10 @@ export function alias<T>(propertyPath: string) {
     };
 
     result.descriptor.get = function(): T {
-      return get(this as Dict, propertyPath) as T;
+      return get(this as Dict<any>, propertyPath);
     };
     result.descriptor.set = function(value: any) {
-      set(this as Dict, propertyPath, value);
+      set(this as Dict<any>, propertyPath, value);
     };
 
     return result;
