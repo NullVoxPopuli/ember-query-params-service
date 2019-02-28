@@ -22,43 +22,87 @@ ember install ember-query-params-service
 Usage
 ------------------------------------------------------------------------------
 
+### _The `@queryParam` Decorator_
+
 ```ts
 import Route from '@ember/routing/route';
-import { inject as service } from '@ember/service';
+import { queryParam } from 'ember-query-params-service';
 
 export default class ApplicationRoute extends Route {
-  @service queryParams;
-
+  @queryParam('r') isSpeakerNotes;
+  @queryParams('slide') slideNumber;
+  
   model() {
     return {
-      QPs: JSON.stringify(this.queryParams.current),
+      isSpeakerNotes: this.isSpeakerNotes,
+      slideNumber: this.slideNumber
     }
   }
 }
 ```
 
 ```hbs
-{{this.model.QPs}}
+{{this.model.isSpeakerNotes}} - {{this.model.slideNumber}}
 ```
 
-and then visiting `/?a=1&b=2` will show:
+### _Expanded usage with the service_
 
-```
-{ 
-  a: 1,
-  b: 2
+```ts
+import Route from '@ember/routing/route';
+import { inject as service } from '@ember/service';
+import { alias } from 'ember-query-params-service';
+
+
+export default class ApplicationRoute extends Route {
+  @service queryParams;
+
+  @alias('queryParams.current.r') isSpeakerNotes;
+  @alias('queryParams.current.slide') slideNumber;
+  
+  model() {
+    return {
+      isSpeakerNotes: this.isSpeakerNotes,
+      slideNumber: this.slideNumber
+    }
+  }
 }
 ```
 
+
 ### **Setting Query Params**
 
-```ts
-  @service queryParams;
+ - Directly on the service:
 
-  // ...somewhere
-  this.queryParams.current.queryParamName = 'some value';
-```
-and then the URL will show `queryParamName=some%20value`
+    ```ts
+      @service queryParams;
+
+      // ...somewhere
+      this.queryParams.current.queryParamName = 'some value';
+    ```
+    and then the URL will show `queryParamName=some%20value`
+
+ - or via the `@alias` decorator:
+
+    ```ts
+      @alias('queryParams.current.r') isSpeakerNotes;
+
+      // ...somewhere
+      this.isSpeakerNotes = false;
+    ```
+    and then the URL will show `r=false`
+
+
+ - or via the `@queryParam` decorator:
+
+    ```ts
+      @queryParam('r') isSpeakerNotes;
+
+      // ...somewhere
+      this.isSpeakerNotes = false;
+    ```
+    and then the URL will show `r=false`
+
+
 
 ## API
 
