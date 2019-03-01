@@ -1,4 +1,4 @@
-import QueryParamsService from "ember-query-params-service/src/services/query-params";
+import { QueryParamsService } from "ember-query-params-service";
 
 
 export default class extends QueryParamsService {}

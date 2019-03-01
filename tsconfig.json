@@ -27,6 +27,9 @@
       "dummy/src/*": [
         "tests/dummy/src/*"
       ],
+      "ember-query-params-service": [
+        "src/index.ts"
+      ],
       "ember-query-params-service/src/*": [
         "src/*"
       ],
