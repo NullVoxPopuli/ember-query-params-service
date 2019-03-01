@@ -8,10 +8,6 @@ module.exports = {
   included() {
     this._super.included.apply(this, arguments);
 
-    if (!this.shouldPolyfill) {
-      return;
-    }
-
     this.import('vendor/ember-query-params-service.js');
   },
 

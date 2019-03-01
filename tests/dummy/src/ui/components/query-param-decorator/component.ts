@@ -12,4 +12,12 @@ export default class QueryParamDecoratorTest extends Component {
   addToBar() {
     this.bar = (this.bar || 0) + 1
   }
+
+  clearFoo() {
+    this.foo = 0;
+  }
+
+  clearBar() {
+    this.bar = 0;
+  }
 }

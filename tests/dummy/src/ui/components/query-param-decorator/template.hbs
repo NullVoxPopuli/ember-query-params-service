@@ -1,14 +1,16 @@
 <div data-test-qp-foo>
-  <span>{{this.foo}}</span>
+  <span>{{this.foo}}</span> |
   <button {{action this.addToFoo}}>
     Add to Foo
   </button>
+  <button {{action this.clearFoo}}>Clear</button>
 </div>
 
 <div data-test-qp-bar>
-  <span>{{this.bar}}</span>
+  <span>{{this.bar}}</span> |
   <button {{action this.addToBar}}>
     Add to Bar
   </button>
+  <button {{action this.clearBar}}>Clear</button>
 </div>
 
