@@ -46,6 +46,26 @@ export default class ApplicationRoute extends Route {
 {{this.model.isSpeakerNotes}} - {{this.model.slideNumber}}
 ```
 
+optionally, a deserialize function may be passed to the decorator:
+
+```ts
+import Component from "@glimmer/component";
+import { queryParam } from "ember-query-params-service";
+
+export default class SomeComponent extends Component {
+  @queryParam("foo", {
+    deserialize: (qp) =>  parseInt(qp)
+  })
+  foo;
+
+   addToFoo() {
+    this.foo = (this.foo || 0) + 1;
+  }
+}
+```
+
+this would allow numeric operations on the query param (whereas, by default, query params are all strings)
+
 ### _Expanded usage with the service_
 
 ```ts
