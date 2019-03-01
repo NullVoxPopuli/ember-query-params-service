@@ -3,9 +3,6 @@ import Resolver from "./resolver";
 import loadInitializers from "ember-load-initializers";
 import config from "../config/environment";
 
-define.alias('ember-query-params-service/src/index', 'ember-query-params-service')
-
-
 const App = Application.extend({
   modulePrefix: config.modulePrefix,
   podModulePrefix: config.podModulePrefix,
