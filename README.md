@@ -15,7 +15,8 @@ Installation
 ------------------------------------------------------------------------------
 
 ```
-ember install ember-query-params-service
+# ember install ember-query-params-service # (not yet)
+ember install github:NullVoxPopuli/ember-query-params-service
 ```
 
 
