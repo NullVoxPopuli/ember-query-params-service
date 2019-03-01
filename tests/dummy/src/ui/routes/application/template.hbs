@@ -4,20 +4,18 @@
   {{this.model.QPs}}
 </div>
 
-<Link @to='application' @queryParams={{hash a=2}}>
-  a=2
-</Link>
+<Link @to='application' @queryParams={{hash}}>Clear</Link>
 
 <br>
 
-<Link @to='foo' @queryParams={{hash b=4}}>
-  b=4
-</Link>
+<Link @to='application' @queryParams={{hash a=2}}>a=2</Link>
 
 <br>
-<Link @to='bar' @queryParams={{hash a=2 b=6}}>
-  a=2, b=6
-</Link>
+
+<Link @to='foo' @queryParams={{hash b=4}}>b=4</Link>
+
+<br>
+<Link @to='bar' @queryParams={{hash a=2 b=6}}>a=2, b=6</Link>
 
 
 <QueryParamDecorator />
