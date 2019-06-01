@@ -43,7 +43,7 @@
     "@types/rsvp": "^4.0.2",
     "babel-eslint": "^8.0.2",
     "broccoli-asset-rev": "^3.0.0",
-    "ember-cli": "github:ember-cli/ember-cli#1fee05d354b3a231409062ef83256a53a049e1e4",
+    "ember-cli": "github:ember-cli/ember-cli#b4aa56143d5b25b4d5317632c1c0429bbc0bbd56",
     "ember-cli-app-version": "^3.2.0",
     "ember-cli-dependency-checker": "^3.0.0",
     "ember-cli-eslint": "^5.0.0",
