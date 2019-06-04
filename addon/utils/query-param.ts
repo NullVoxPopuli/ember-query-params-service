@@ -1,6 +1,6 @@
 import { get, set } from "@ember/object";
 import { getOwner } from "@ember/application";
-import { default as QueryParamsService } from "../services/query-params";
+import { default as QueryParamsService } from "../../app/services/query-params";
 
 export interface ITransformOptions<T> {
   deserialize?: (queryParam: string) => T;

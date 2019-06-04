@@ -10,3 +10,4 @@ module('Unit | Service | query-params', function(hooks) {
     assert.ok(service);
   });
 });
+

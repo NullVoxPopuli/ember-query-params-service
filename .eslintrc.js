@@ -2,7 +2,7 @@ module.exports = {
   root: true,
   parser: 'babel-eslint',
   parserOptions: {
-    ecmaVersion: 2017,
+    ecmaVersion: 2018,
     sourceType: 'module'
   },
   plugins: [
@@ -21,6 +21,7 @@ module.exports = {
     // node files
     {
       files: [
+        '.ember-cli.js',
         '.eslintrc.js',
         '.template-lintrc.js',
         'ember-cli-build.js',
@@ -31,7 +32,9 @@ module.exports = {
         'tests/dummy/config/**/*.js'
       ],
       excludedFiles: [
-        'src/**',
+        'addon/**',
+        'addon-test-support/**',
+        'app/**',
         'tests/dummy/app/**'
       ],
       parserOptions: {
@@ -44,10 +47,8 @@ module.exports = {
       },
       plugins: ['node'],
       rules: Object.assign({}, require('eslint-plugin-node').configs.recommended.rules, {
-        'node/no-extraneous-require': 'off',
-        'node/no-unpublished-require': 'off',
         // add your custom rules and overrides for node files here
       })
     }
   ]
-}
+};
