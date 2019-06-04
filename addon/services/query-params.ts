@@ -18,17 +18,19 @@ export default class QueryParamsService extends Service {
   @tracked current!: QueryParams;
   @tracked byPath: QueryParamsByPath = {};
 
-  constructor() {
-    super(...arguments);
+  constructor(...args: any[]) {
+    super(...args);
 
     this.setupProxies();
   }
 
-  init() {
-    this.updateParams();
+  init(...args: any[]) {
+    super.init(...args);
 
-    this.router.on("routeDidChange", () => this.updateParams());
-    this.router.on("routeWillChange", () => this.updateParams());
+    // this.updateParams();
+
+    // this.router.on("routeDidChange", () => this.updateParams());
+    // this.router.on("routeWillChange", () => this.updateParams());
   }
 
   get pathParts() {

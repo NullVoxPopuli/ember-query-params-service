@@ -1,5 +1,6 @@
 import Component from "@glimmer/component";
-import { queryParam } from "ember-query-params-service";
+import { queryParam } from "ember-query-params-service/utils/query-param";
+import { action } from '@ember/object';
 
 export default class QueryParamDecoratorTest extends Component {
   @queryParam("foo", {
@@ -9,19 +10,19 @@ export default class QueryParamDecoratorTest extends Component {
 
   @queryParam("bar") bar!: number;
 
-  addToFoo() {
+  @action addToFoo() {
     this.foo = (this.foo || 0) + 1;
   }
 
-  addToBar() {
+  @action addToBar() {
     this.bar = (this.bar || 0) + 1;
   }
 
-  clearFoo() {
+  @action clearFoo() {
     this.foo = 0;
   }
 
-  clearBar() {
+  @action clearBar() {
     this.bar = 0;
   }
 }

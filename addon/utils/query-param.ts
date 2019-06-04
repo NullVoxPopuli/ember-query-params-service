@@ -1,5 +1,6 @@
 import { get, set } from "@ember/object";
 import { getOwner } from "@ember/application";
+import { tracked } from '@glimmer/tracking';
 import { default as QueryParamsService } from "../../app/services/query-params";
 
 export interface ITransformOptions<T> {
@@ -20,33 +21,33 @@ export function queryParam<T>(name: string, options?: ITransformOptions<T>) {
     propertyKey: keyof Target,
     descriptor?: any
   ): void => {
+    const { get: oldGet, set: oldSet } = tracked(target, propertyKey, descriptor);
+
     const result = {
       ...(descriptor || {}),
       enumerable: false,
-      configurable: false
-      // initializer() {
-      //   // setup the service-key ahead of instantiation so that the
-      //   // class doesn't get depotimized when we ensure the service's
-      //   // existence at runtime in the get/set methods
-      //   //
-      //   // kinda related: https://gist.github.com/twokul/9501770
-      //   // but this tweet thread: https://twitter.com/pzuraq/status/1101251703171538944
-      //   this[SERVICE_KEY] = null;
-      //   console.log('eh', this);
-      // },
+      configurable: false,
+      get: function(): T {
+        const service = ensureService(this);
+        const initialValue = oldGet!.call(this);
+
+        const value = get<any, any>(service, propertyPath) || initialValue;
+
+        const deserialized = tryDeserialize(value, options);
+
+        debugger;
+        return deserialized;
+      },
+      set: function(value: any) {
+        const service = ensureService(this);
+
+        debugger;
+        set<any, any>(service, propertyPath, value);
+        oldSet!.call(this, value);
+      },
     };
 
-    result.get = function(): T {
-      let service = ensureService(this);
-      let value = get<any, any>(service, propertyPath);
 
-      return tryDeserialize(value, options);
-    };
-    result.set = function(value: any) {
-      let service = ensureService(this);
-
-      set<any, any>(service, propertyPath, value);
-    };
 
     return result as any;
   };
