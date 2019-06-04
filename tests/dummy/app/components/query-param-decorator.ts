@@ -5,9 +5,9 @@ export default class QueryParamDecoratorTest extends Component {
   @queryParam("foo", {
     deserialize: (qp) =>  parseInt(qp)
   })
-  foo;
+  foo!: number;
 
-  @queryParam("bar") bar;
+  @queryParam("bar") bar!: number;
 
   addToFoo() {
     this.foo = (this.foo || 0) + 1;

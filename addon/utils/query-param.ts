@@ -6,23 +6,24 @@ export interface ITransformOptions<T> {
   deserialize?: (queryParam: string) => T;
 }
 
-const SERVICE_KEY = Symbol('__QUERY_PARAMS_SERVICE__');
+const SERVICE_KEY = Symbol("__QUERY_PARAMS_SERVICE__");
 
 export function queryParam<T>(name: string, options?: ITransformOptions<T>) {
   let propertyPath = `current.${name}`;
 
   if (options) {
-    console.warn('queryParam options are not yet implemented');
+    console.warn("queryParam options are not yet implemented");
   }
 
-  return (desc: IMethodDecorator): ElementDescriptor => {
-    const result: ElementDescriptor = {
-      ...desc,
-      kind: 'method',
-      descriptor: {
-        enumerable: false,
-        configurable: false,
-      },
+  return <T = boolean, Target = Record<string, any>>(
+    target: Target,
+    propertyKey: keyof Target,
+    descriptor?: any
+  ): void => {
+    const result = {
+      ...(descriptor || {}),
+      enumerable: false,
+      configurable: false
       // initializer() {
       //   // setup the service-key ahead of instantiation so that the
       //   // class doesn't get depotimized when we ensure the service's
@@ -35,20 +36,20 @@ export function queryParam<T>(name: string, options?: ITransformOptions<T>) {
       // },
     };
 
-    result.descriptor.get = function (): T {
+    result.get = function(): T {
       let service = ensureService(this);
       let value = get<any, any>(service, propertyPath);
 
       return tryDeserialize(value, options);
     };
-    result.descriptor.set = function (value: any) {
+    result.set = function(value: any) {
       let service = ensureService(this);
 
       set<any, any>(service, propertyPath, value);
     };
 
-    return result;
-  }
+    return result as any;
+  };
 }
 
 function tryDeserialize<T>(value: any, options?: ITransformOptions<T>) {
@@ -69,5 +70,5 @@ function ensureService(context: any): QueryParamsService {
 }
 
 function getService(context: any) {
-  return getOwner(context).lookup('service:queryParams');
+  return getOwner(context).lookup("service:queryParams");
 }

@@ -1,28 +1,15 @@
-import Service, { inject as service } from '@ember/service';
-import RouterService from '@ember/routing/router-service';
+import Service, { inject as service } from "@ember/service";
+import RouterService from "@ember/routing/router-service";
 
-import { tracked } from '@glimmer/tracking';
-import * as qs from 'qs';
+import { tracked } from "@glimmer/tracking";
+import * as qs from "qs";
 
 interface QueryParams {
   [key: string]: number | string | undefined | QueryParams;
 }
 
-interface QueryParamsByPath { [key: string]: QueryParams; }
-
-const queryParamHandler = {
-  get(obj: any, key: string, ...rest: any[]) {
-    return Reflect.get(obj, key, ...rest);
-  },
-  set(obj: any, key: string, value: any, ...rest: any[]) {
-    let { protocol, host, pathname } = window.location;
-    let query = qs.stringify({ ...obj, [key]: value });
-    let newUrl = `${protocol}//${host}${pathname}?${query}`;
-
-    window.history.pushState({ path: newUrl }, '', newUrl);
-
-    return Reflect.set(obj, key, value, ...rest);
-  }
+interface QueryParamsByPath {
+  [key: string]: QueryParams;
 }
 
 export default class QueryParamsService extends Service {
@@ -40,12 +27,12 @@ export default class QueryParamsService extends Service {
   init() {
     this.updateParams();
 
-    this.router.on('routeDidChange', () => this.updateParams());
-    this.router.on('routeWillChange', () => this.updateParams());
+    this.router.on("routeDidChange", () => this.updateParams());
+    this.router.on("routeWillChange", () => this.updateParams());
   }
 
   get pathParts() {
-    const [path, params] = (this.router.currentURL || '').split('?');
+    const [path, params] = (this.router.currentURL || "").split("?");
 
     return [path, params];
   }
@@ -77,10 +64,24 @@ export default class QueryParamsService extends Service {
   }
 }
 
+const queryParamHandler = {
+  get(obj: any, key: string, ...rest: any[]) {
+    return Reflect.get(obj, key, ...rest);
+  },
+  set(obj: any, key: string, value: any, ...rest: any[]) {
+    let { protocol, host, pathname } = window.location;
+    let query = qs.stringify({ ...obj, [key]: value });
+    let newUrl = `${protocol}//${host}${pathname}?${query}`;
+
+    window.history.pushState({ path: newUrl }, "", newUrl);
+
+    return Reflect.set(obj, key, value, ...rest);
+  }
+};
 
 // DO NOT DELETE: this is how TypeScript knows how to look up your services.
-declare module '@ember/service' {
+declare module "@ember/service" {
   interface Registry {
-    'query-params': QueryParams;
+    "query-params": QueryParams;
   }
 }
