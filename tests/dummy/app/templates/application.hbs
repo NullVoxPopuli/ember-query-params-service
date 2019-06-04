@@ -4,18 +4,16 @@
   {{this.model.QPs}}
 </div>
 
-<Link @to='application' @queryParams={{hash}}>Clear</Link>
+<LinkTo @route='application' @query={{hash}}>/ aka Clear</LinkTo>
 
 <br>
-
-<Link @to='application' @queryParams={{hash a=2}}>a=2</Link>
-
-<br>
-
-<Link @to='foo' @queryParams={{hash b=4}}>b=4</Link>
+<LinkTo @route='application' @query={{hash a=2}}>/?a=2</LinkTo>
 
 <br>
-<Link @to='bar' @queryParams={{hash a=2 b=6}}>a=2, b=6</Link>
+<LinkTo @route='foo' @query={{hash b=4}}>/foo?b=4</LinkTo>
+
+<br>
+<LinkTo @route='bar' @query={{hash a=2 b=6}}>/bar?a=2&b=6</LinkTo>
 
 
 <QueryParamDecorator />

@@ -25,13 +25,9 @@ export function queryParam<T>(name: string, options?: ITransformOptions<T>) {
 
     const result = {
       ...(descriptor || {}),
-      // enumerable: false,
-      // configurable: false,
       get: function(): T {
         const service = ensureService(this);
-
         const value = get<any, any>(service, propertyPath);
-
         const deserialized = tryDeserialize(value, options);
 
         return deserialized;

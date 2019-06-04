@@ -32,6 +32,7 @@
     "qs": "^6.7.0"
   },
   "devDependencies": {
+    "@ember-decorators/utils": "^6.0.0",
     "@ember/optional-features": "^0.7.0",
     "@glimmer/component": "^0.14.0-alpha.3",
     "@types/ember": "^3.1.0",

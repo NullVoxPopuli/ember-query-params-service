@@ -29,8 +29,8 @@ export default class QueryParamsService extends Service {
 
     this.updateParams();
 
-    // this.router.on("routeDidChange", () => this.updateParams());
-    // this.router.on("routeWillChange", () => this.updateParams());
+    this.router.on("routeDidChange", () => this.updateParams());
+    this.router.on("routeWillChange", () => this.updateParams());
   }
 
   get pathParts() {
