@@ -27,7 +27,7 @@ export default class QueryParamsService extends Service {
   init(...args: any[]) {
     super.init(...args);
 
-    // this.updateParams();
+    this.updateParams();
 
     // this.router.on("routeDidChange", () => this.updateParams());
     // this.router.on("routeWillChange", () => this.updateParams());

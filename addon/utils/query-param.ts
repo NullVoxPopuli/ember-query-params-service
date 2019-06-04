@@ -19,35 +19,30 @@ export function queryParam<T>(name: string, options?: ITransformOptions<T>) {
   return <T = boolean, Target = Record<string, any>>(
     target: Target,
     propertyKey: keyof Target,
-    descriptor?: any
+    sourceDescriptor?: any
   ): void => {
-    const { get: oldGet, set: oldSet } = tracked(target, propertyKey, descriptor);
+    const { get: oldGet, set: oldSet, descriptor  } = tracked(target, propertyKey, sourceDescriptor);
 
     const result = {
       ...(descriptor || {}),
-      enumerable: false,
-      configurable: false,
+      // enumerable: false,
+      // configurable: false,
       get: function(): T {
         const service = ensureService(this);
-        const initialValue = oldGet!.call(this);
 
-        const value = get<any, any>(service, propertyPath) || initialValue;
+        const value = get<any, any>(service, propertyPath);
 
         const deserialized = tryDeserialize(value, options);
 
-        debugger;
         return deserialized;
       },
       set: function(value: any) {
         const service = ensureService(this);
 
-        debugger;
         set<any, any>(service, propertyPath, value);
         oldSet!.call(this, value);
       },
     };
-
-
 
     return result as any;
   };

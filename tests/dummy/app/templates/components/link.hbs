@@ -1,7 +1,7 @@
 <a
   ...attributes
   href={{this.url}}
-  onclick={{action this.onClick}}
+  {{on 'click' this.onClick}}
 >
   {{yield}}
 </a>
