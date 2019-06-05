@@ -26,9 +26,6 @@ module.exports = {
     '@typescript-eslint/camelcase': 'off', // temp disable, because route params are snake case
     'getter-return': 'off',
 
-    // tests / qunit
-    'qunit/no-identical-names': 'warn', // doesn't support deep nesting
-
     // typescript
     '@typescript-eslint/no-unused-vars': ['error', { argsIgnorePattern: '^_' }],
     '@typescript-eslint/no-use-before-define': 'off',

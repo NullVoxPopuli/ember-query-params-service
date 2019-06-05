@@ -6,5 +6,5 @@ export function initialize(application: Application): void {
 }
 
 export default {
-  initialize
+  initialize,
 };
