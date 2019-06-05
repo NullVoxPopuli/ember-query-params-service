@@ -1,0 +1,18 @@
+<div data-test-qp-foo>
+  <span>{{this.foo}}</span> |
+  <button {{on 'click' this.addToFoo}}>
+    Add to Foo
+  </button>
+  <button {{on 'click' this.fooToZero}}>make 0</button>
+  <button {{on 'click' this.clearFoo}}>Clear</button>
+</div>
+
+<div data-test-qp-bar>
+  <span>{{this.bar}}</span> |
+  <button {{on 'click' this.addToBar}}>
+    Add to Bar
+  </button>
+  <button {{on 'click' this.barToZero}}>make 0</button>
+  <button {{on 'click' this.clearBar}}>Clear</button>
+</div>
+

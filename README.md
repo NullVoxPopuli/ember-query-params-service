@@ -7,8 +7,8 @@ ember-query-params-service
 Compatibility
 ------------------------------------------------------------------------------
 
-* Ember.js v3.9 or above
-* Ember CLI v3.9 or above
+* Ember.js v3.4 or above
+* Ember CLI v3.4 or above
 
 
 Installation
@@ -32,7 +32,7 @@ import { queryParam } from 'ember-query-params-service';
 export default class ApplicationRoute extends Route {
   @queryParam('r') isSpeakerNotes;
   @queryParams('slide') slideNumber;
-  
+
   model() {
     return {
       isSpeakerNotes: this.isSpeakerNotes,
@@ -54,7 +54,8 @@ import { queryParam } from "ember-query-params-service";
 
 export default class SomeComponent extends Component {
   @queryParam("foo", {
-    deserialize: (qp) =>  parseInt(qp)
+    deserialize: (qp) =>  parseInt(( qp || '' ).replace(/-/g, '')),
+    serialize: (value) => `-${value}-`,
   })
   foo;
 
@@ -64,7 +65,7 @@ export default class SomeComponent extends Component {
 }
 ```
 
-this would allow numeric operations on the query param (whereas, by default, query params are all strings)
+this would not only allow numeric operations on the query param (whereas, by default, query params are all strings), but it also allows any sort of transform to occur between the queryParam in the URL and the property that you want to interact with.
 
 ### _Expanded usage with the service_
 
@@ -79,7 +80,7 @@ export default class ApplicationRoute extends Route {
 
   @alias('queryParams.current.r') isSpeakerNotes;
   @alias('queryParams.current.slide') slideNumber;
-  
+
   model() {
     return {
       isSpeakerNotes: this.isSpeakerNotes,

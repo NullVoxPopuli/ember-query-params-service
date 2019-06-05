@@ -2,11 +2,6 @@
 
 module.exports = function(environment) {
   let ENV = {
-    'ember-resolver': {
-      features: {
-        EMBER_RESOLVER_MODULE_UNIFICATION: true
-      }
-    },
     modulePrefix: 'dummy',
     environment,
     rootURL: '/',
@@ -14,21 +9,19 @@ module.exports = function(environment) {
     EmberENV: {
       FEATURES: {
         // Here you can enable experimental features on an ember canary build
-        // e.g. EMBER_NATIVE_DECORATOR_SUPPORT: true
-        EMBER_MODULE_UNIFICATION: true,
-        EMBER_NATIVE_DECORATOR_SUPPORT: true,
+        // e.g. EMBER_MODULE_UNIFICATION: true
         EMBER_METAL_TRACKED_PROPERTIES: true,
       },
       EXTEND_PROTOTYPES: {
         // Prevent Ember Data from overriding Date.parse.
-        Date: false
-      }
+        Date: false,
+      },
     },
 
     APP: {
       // Here you can pass flags/options to your application instance
       // when it is created
-    }
+    },
   };
 
   if (environment === 'development') {
