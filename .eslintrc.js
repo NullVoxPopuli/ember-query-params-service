@@ -27,6 +27,7 @@ module.exports = {
     'getter-return': 'off',
 
     // typescript
+    '@typescript-eslint/no-explicit-any': 'off', // someday we'll have decorator types
     '@typescript-eslint/no-unused-vars': ['error', { argsIgnorePattern: '^_' }],
     '@typescript-eslint/no-use-before-define': 'off',
     '@typescript-eslint/no-empty-interface': 'off',

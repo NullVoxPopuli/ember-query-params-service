@@ -1,11 +1,11 @@
-import Component from "@glimmer/component";
-import { queryParam } from "ember-query-params-service";
+import Component from '@glimmer/component';
+import { queryParam } from 'ember-query-params-service';
 import { action } from '@ember/object';
 
 export default class QueryParamDecoratorTest extends Component {
   @queryParam({
-    deserialize: (qp) =>  parseInt(( qp || '-1' ).replace(/-/g, '')),
-    serialize: (value) => `-${value || 'not set'}-`,
+    deserialize: (qp: string) => parseInt((qp || '-1').replace(/-/g, '')),
+    serialize: (value: number) => `-${value || 'not set'}-`,
   })
   foo?: number;
 
