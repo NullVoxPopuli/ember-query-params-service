@@ -5,7 +5,7 @@ import { module, test } from 'qunit';
 import { setupTest } from 'ember-qunit';
 import { run } from '@ember/runloop';
 
-module('Unit | Initializer | register-query-params-service', function(hooks) {
+module('Unit | Initializer | register-query-params-service', function(hooks: NestedHooks) {
   setupTest(hooks);
 
   hooks.beforeEach(function() {

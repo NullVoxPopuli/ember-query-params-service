@@ -24,8 +24,8 @@ export default class QueryParamsService extends Service {
     this.setupProxies();
   }
 
-  init(...args: any[]) {
-    super.init(...args);
+  init() {
+    super.init();
 
     this.updateParams();
 
