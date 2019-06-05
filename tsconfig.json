@@ -3,6 +3,7 @@
     "target": "es2017",
     "allowJs": true,
     "moduleResolution": "node",
+    "skipLibCheck": true,
     "allowSyntheticDefaultImports": true,
     "noImplicitAny": false,
     "noImplicitThis": true,
@@ -52,8 +53,5 @@
     "types/**/*",
     "test-support/**/*",
     "addon-test-support/**/*"
-  ],
-  "exclude": [
-    "node_modules/**"
   ]
 }
