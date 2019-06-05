@@ -1,11 +1,10 @@
 module.exports = {
   root: true,
   parser: '@typescript-eslint/parser',
-  plugins: ['ember', 'prettier', 'qunit', '@typescript-eslint'],
+  plugins: ['ember', 'prettier', '@typescript-eslint'],
   extends: [
     'eslint:recommended',
     'plugin:ember/recommended',
-    'plugin:qunit/recommended',
     'plugin:@typescript-eslint/recommended',
     'prettier',
     'prettier/@typescript-eslint',
@@ -63,12 +62,7 @@ module.exports = {
         'config/**/*.js',
         'tests/dummy/config/**/*.js',
       ],
-      excludedFiles: [
-        'addon/**',
-        'addon-test-support/**',
-        'app/**',
-        'tests/dummy/app/**'
-      ],
+      excludedFiles: ['addon/**', 'addon-test-support/**', 'app/**', 'tests/dummy/app/**'],
       env: {
         browser: false,
         node: true,

@@ -1,6 +1,6 @@
 {
   "name": "ember-query-params-service",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "keywords": [
     "ember-addon"
   ],
@@ -69,6 +69,7 @@
     "eslint-plugin-node": "^9.1.0",
     "eslint-plugin-prettier": "^3.1.0",
     "loader.js": "^4.7.0",
+    "prettier": "^1.17.1",
     "qunit-dom": "^0.8.5",
     "typescript": "^3.5.1"
   },

@@ -8,45 +8,19 @@ export interface ITransformOptions<T> {
   serialize?: (queryParam: T) => string;
 }
 
-export function queryParam<T>(...args) {
-  const [maybePathMaybeOptions, maybeOptions] = args;
+type Args<T = boolean> = [string, ITransformOptions<T>] | [ITransformOptions<T>] | [string];
+
+export function queryParam<T = boolean>(...args: Args<T>) {
 
   return <T = boolean, Target = Record<string, any>>(
     target: Target,
     propertyKey: keyof Target,
     sourceDescriptor?: any
   ): void => {
-    const {
-      set: oldSet,
-      descriptor
-    } = tracked(target, propertyKey, { ...sourceDescriptor,
-      initializer() {
-        // In order for links to work, queryParams MUST
-        // exist on the controller.
-        //
-        // Much sadness
-        const controller = getController(this, 'application');
+    const { set: oldSet, descriptor } = tracked(target, propertyKey, sourceDescriptor);
+    const [propertyPath, options] = extractArgs(args, propertyKey);
 
-        if (controller.queryParams) {
-          controller.queryParams.push(propertyKey);
-        } else {
-          controller.queryParams = [propertyKey];
-        }
-
-        console.log('controller', controller);
-      }
-    });
-
-    let propertyPath: string;
-    let options: ITransformOptions<T>;
-
-    if (typeof maybePathMaybeOptions === 'string') {
-      propertyPath = `current.${ maybePathMaybeOptions }`;
-      options = maybeOptions || {};
-    } else {
-      propertyPath = `current.${propertyKey}`;
-      options = maybePathMaybeOptions || {};
-    }
+    setupController(target);
 
     const result = {
       ...(descriptor || {}),
@@ -69,6 +43,41 @@ export function queryParam<T>(...args) {
 
     return result as any;
   };
+}
+
+function setupController(context: any) {
+        // In order for links to work, queryParams MUST
+        // exist on the controller.
+        //
+        // Much sadness
+        const controller = getController(context, 'application');
+        console.log('eh', controller);
+
+        if (controller.queryParams) {
+          controller.queryParams.push(propertyKey);
+        } else {
+          controller.queryParams = [propertyKey];
+        }
+
+        console.log('controller', controller);
+
+}
+
+function extractArgs(args: Args, propertyKey: string) {
+  const [maybePathMaybeOptions, maybeOptions] = args;
+
+    let propertyPath: string;
+    let options: ITransformOptions<T>;
+
+    if (typeof maybePathMaybeOptions === 'string') {
+      propertyPath = `current.${ maybePathMaybeOptions }`;
+      options = maybeOptions || {};
+    } else {
+      propertyPath = `current.${propertyKey}`;
+      options = maybePathMaybeOptions || {};
+    }
+
+  return [propertyPath, options];
 }
 
 function tryDeserialize<T>(value: any, options: ITransformOptions<T>) {
