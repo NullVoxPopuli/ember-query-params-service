@@ -1,5 +1,5 @@
 import Component from "@glimmer/component";
-import { queryParam } from "ember-query-params-service/utils/query-param";
+import { queryParam } from "ember-query-params-service";
 import { action } from '@ember/object';
 
 export default class QueryParamDecoratorTest extends Component {

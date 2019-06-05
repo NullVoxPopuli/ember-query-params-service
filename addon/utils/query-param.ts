@@ -1,7 +1,7 @@
 import { get, set } from '@ember/object';
 import { getOwner } from '@ember/application';
 import { tracked } from '@glimmer/tracking';
-import { default as QueryParamsService } from '../../app/services/query-params';
+import { default as QueryParamsService } from '../services/query-params';
 
 export interface ITransformOptions<T> {
   deserialize?: (queryParam: string) => T;
@@ -27,7 +27,7 @@ export function queryParam<T = boolean>(...args: Args<T>) {
       configurable: true,
       enumerable: true,
       get: function(): T {
-        setupController(this, 'application');
+        // setupController(this, 'application');
         const service = ensureService(this);
         const value = get<any, any>(service, propertyPath);
         const deserialized = tryDeserialize(value, options);
@@ -35,7 +35,7 @@ export function queryParam<T = boolean>(...args: Args<T>) {
         return deserialized;
       },
       set: function(value: any) {
-        setupController(this, 'application');
+        // setupController(this, 'application');
         const service = ensureService(this);
         const serialized = trySerialize(value, options);
 
