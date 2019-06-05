@@ -4,11 +4,14 @@ import { action } from '@ember/object';
 
 export default class QueryParamDecoratorTest extends Component {
   @queryParam("foo", {
-    deserialize: (qp) =>  parseInt(qp)
+    fromString: (qp) =>  parseInt(( qp || '' ).replace(/-/g, '')),
+    toString: (value) => `-${value}-`,
   })
-  foo!: number;
+  foo?: number;
 
-  @queryParam("bar") bar!: number;
+  @queryParam("bar", {
+    fromString: (qp) =>  parseInt(qp),
+  }) bar?: number;
 
   @action addToFoo() {
     this.foo = (this.foo || 0) + 1;
@@ -18,11 +21,19 @@ export default class QueryParamDecoratorTest extends Component {
     this.bar = (this.bar || 0) + 1;
   }
 
-  @action clearFoo() {
+  @action fooToZero() {
     this.foo = 0;
   }
 
-  @action clearBar() {
+  @action barToZero() {
     this.bar = 0;
+  }
+
+  @action clearFoo() {
+    this.foo = undefined;
+  }
+
+  @action clearBar() {
+    this.bar = undefined;
   }
 }

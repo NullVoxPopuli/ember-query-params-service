@@ -4,10 +4,9 @@ import { tracked } from '@glimmer/tracking';
 import { default as QueryParamsService } from "../../app/services/query-params";
 
 export interface ITransformOptions<T> {
-  deserialize?: (queryParam: string) => T;
+  fromString?: (queryParam: string) => T;
+  toString?: (queryParam: T) => string;
 }
-
-const SERVICE_KEY = Symbol("__QUERY_PARAMS_SERVICE__");
 
 export function queryParam<T>(name: string, options?: ITransformOptions<T>) {
   let propertyPath = `current.${name}`;
@@ -21,7 +20,11 @@ export function queryParam<T>(name: string, options?: ITransformOptions<T>) {
     propertyKey: keyof Target,
     sourceDescriptor?: any
   ): void => {
-    const { get: oldGet, set: oldSet, descriptor  } = tracked(target, propertyKey, sourceDescriptor);
+    const {
+      get: oldGet,
+      set: oldSet,
+      descriptor
+    } = tracked(target, propertyKey, sourceDescriptor);
 
     const result = {
       ...(descriptor || {}),
@@ -35,8 +38,9 @@ export function queryParam<T>(name: string, options?: ITransformOptions<T>) {
       set: function(value: any) {
         const service = ensureService(this);
 
-        set<any, any>(service, propertyPath, value);
-        oldSet!.call(this, value);
+        const serialized = trySerialize(value, options);
+        set<any, any>(service, propertyPath, serialized);
+        oldSet!.call(this, serialized);
       },
     };
 
@@ -46,21 +50,32 @@ export function queryParam<T>(name: string, options?: ITransformOptions<T>) {
 
 function tryDeserialize<T>(value: any, options?: ITransformOptions<T>) {
   if (!options) return value;
-  if (!options.deserialize) return value;
+  if (!options.fromString) return value;
 
-  return options.deserialize(value);
+  return options.fromString(value);
 }
 
+function trySerialize<T>(value: any, options?: ITransformOptions<T>) {
+  if (!options) return value;
+  if (!options.toString) return value;
+
+  return options.toString(value);
+}
+
+// could there ever be a problem with using only one variable in module-space?
+let qpService: QueryParamsService;
 function ensureService(context: any): QueryParamsService {
-  if (context[SERVICE_KEY]) {
-    return context[SERVICE_KEY];
-  }
+  if (qpService) { return qpService; }
 
-  context[SERVICE_KEY] = getService(context);
+  qpService = getQPService(context);
 
-  return context[SERVICE_KEY];
+  return qpService;
 }
 
-function getService(context: any) {
+function getQPService(context: any) {
   return getOwner(context).lookup("service:queryParams");
+}
+
+function getController(context: any, name: string) {
+return getOwner(context).lookup(`controller:${name}`);
 }
