@@ -3,15 +3,13 @@ import { queryParam } from "ember-query-params-service/utils/query-param";
 import { action } from '@ember/object';
 
 export default class QueryParamDecoratorTest extends Component {
-  @queryParam("foo", {
-    fromString: (qp) =>  parseInt(( qp || '' ).replace(/-/g, '')),
-    toString: (value) => `-${value}-`,
+  @queryParam({
+    deserialize: (qp) =>  parseInt(( qp || '-1' ).replace(/-/g, '')),
+    serialize: (value) => `-${value || 'not set'}-`,
   })
   foo?: number;
 
-  @queryParam("bar", {
-    fromString: (qp) =>  parseInt(qp),
-  }) bar?: number;
+  @queryParam() bar?: number;
 
   @action addToFoo() {
     this.foo = (this.foo || 0) + 1;
@@ -22,7 +20,7 @@ export default class QueryParamDecoratorTest extends Component {
   }
 
   @action fooToZero() {
-    this.foo = 0;
+    this.foo = 1;
   }
 
   @action barToZero() {

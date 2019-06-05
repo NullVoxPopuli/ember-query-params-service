@@ -4,16 +4,12 @@ import { tracked } from '@glimmer/tracking';
 import { default as QueryParamsService } from "../../app/services/query-params";
 
 export interface ITransformOptions<T> {
-  fromString?: (queryParam: string) => T;
-  toString?: (queryParam: T) => string;
+  deserialize?: (queryParam: string) => T;
+  serialize?: (queryParam: T) => string;
 }
 
-export function queryParam<T>(name: string, options?: ITransformOptions<T>) {
-  let propertyPath = `current.${name}`;
-
-  if (options) {
-    console.warn("queryParam options are not yet implemented");
-  }
+export function queryParam<T>(...args) {
+  const [maybePathMaybeOptions, maybeOptions] = args;
 
   return <T = boolean, Target = Record<string, any>>(
     target: Target,
@@ -21,13 +17,40 @@ export function queryParam<T>(name: string, options?: ITransformOptions<T>) {
     sourceDescriptor?: any
   ): void => {
     const {
-      get: oldGet,
       set: oldSet,
       descriptor
-    } = tracked(target, propertyKey, sourceDescriptor);
+    } = tracked(target, propertyKey, { ...sourceDescriptor,
+      initializer() {
+        // In order for links to work, queryParams MUST
+        // exist on the controller.
+        //
+        // Much sadness
+        const controller = getController(this, 'application');
+
+        if (controller.queryParams) {
+          controller.queryParams.push(propertyKey);
+        } else {
+          controller.queryParams = [propertyKey];
+        }
+
+        console.log('controller', controller);
+      }
+    });
+
+    let propertyPath: string;
+    let options: ITransformOptions<T>;
+
+    if (typeof maybePathMaybeOptions === 'string') {
+      propertyPath = `current.${ maybePathMaybeOptions }`;
+      options = maybeOptions || {};
+    } else {
+      propertyPath = `current.${propertyKey}`;
+      options = maybePathMaybeOptions || {};
+    }
 
     const result = {
       ...(descriptor || {}),
+      initializer: undefined,
       get: function(): T {
         const service = ensureService(this);
         const value = get<any, any>(service, propertyPath);
@@ -37,8 +60,8 @@ export function queryParam<T>(name: string, options?: ITransformOptions<T>) {
       },
       set: function(value: any) {
         const service = ensureService(this);
-
         const serialized = trySerialize(value, options);
+
         set<any, any>(service, propertyPath, serialized);
         oldSet!.call(this, serialized);
       },
@@ -48,18 +71,16 @@ export function queryParam<T>(name: string, options?: ITransformOptions<T>) {
   };
 }
 
-function tryDeserialize<T>(value: any, options?: ITransformOptions<T>) {
-  if (!options) return value;
-  if (!options.fromString) return value;
+function tryDeserialize<T>(value: any, options: ITransformOptions<T>) {
+  if (!options.deserialize) return value;
 
-  return options.fromString(value);
+  return options.deserialize(value);
 }
 
-function trySerialize<T>(value: any, options?: ITransformOptions<T>) {
-  if (!options) return value;
-  if (!options.toString) return value;
+function trySerialize<T>(value: any, options: ITransformOptions<T>) {
+  if (!options.serialize) return value;
 
-  return options.toString(value);
+  return options.serialize(value);
 }
 
 // could there ever be a problem with using only one variable in module-space?
