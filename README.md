@@ -15,9 +15,13 @@ Installation
 ------------------------------------------------------------------------------
 
 ```
-# ember install ember-query-params-service # (not yet)
-ember install github:NullVoxPopuli/ember-query-params-service
+ember install ember-query-params-service
 ```
+
+
+### DISCLAIMER
+
+This package is a work in progress and while it provides a more ergonomic way to access query params from anywhere in the app, there is still a dependency on controllers if you want to be able to link to routes with query params. This is due to an allow-list that's implemented in the route  resolver.  Coming soon is an RFC to propose this decorator to ember core, and remove that allow-list blocker.
 
 
 Usage
@@ -131,6 +135,7 @@ export default class ApplicationRoute extends Route {
  - `queryParams.current` - the current set of query params for the currentURL
 
  - `queryParams.byPath` - query params for every route that has been visited since the last refresh
+
 
 Contributing
 ------------------------------------------------------------------------------
