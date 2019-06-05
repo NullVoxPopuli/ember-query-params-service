@@ -27,6 +27,7 @@ export function queryParam<T = boolean>(...args: Args<T>) {
       configurable: true,
       enumerable: true,
       get: function(): T {
+        setupController(this, 'application');
         const service = ensureService(this);
         const value = get<any, any>(service, propertyPath);
         const deserialized = tryDeserialize(value, options);
@@ -34,6 +35,7 @@ export function queryParam<T = boolean>(...args: Args<T>) {
         return deserialized;
       },
       set: function(value: any) {
+        setupController(this, 'application');
         const service = ensureService(this);
         const serialized = trySerialize(value, options);
 
@@ -52,15 +54,16 @@ function setupController(context: any, propertyKey: string) {
   //
   // Much sadness
   const controller = getController(context, 'application');
-  console.log('eh', controller);
 
-  if (controller.queryParams) {
-    controller.queryParams.push(propertyKey);
-  } else {
-    controller.queryParams = [propertyKey];
+  const p = controller.constructor.prototype;
+
+  if (p.queryParams) {
+    if (!p.queryParams.includes(propertyKey)) {
+      p.queryParams.push(propertyKey);
+    }
   }
 
-  console.log('controller', controller);
+  p.queryParams = [propertyKey];
 }
 
 function extractArgs<T = boolean>(args: Args<T>, propertyKey: string) {
