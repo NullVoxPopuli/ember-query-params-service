@@ -5,14 +5,14 @@ import { module, test } from 'qunit';
 import { setupTest } from 'ember-qunit';
 import { run } from '@ember/runloop';
 
-module('Unit | Initializer | register-query-params-service', function(hooks: NestedHooks) {
+module('Unit | Initializer | register-query-params-service', function(hooks) {
   setupTest(hooks);
 
   hooks.beforeEach(function() {
     this.TestApplication = Application.extend();
     this.TestApplication.initializer({
       name: 'initializer under test',
-      initialize
+      initialize,
     });
 
     this.application = this.TestApplication.create({ autoboot: false });
