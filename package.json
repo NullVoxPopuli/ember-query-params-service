@@ -29,7 +29,6 @@
     "ember-cli-babel": "^7.7.3",
     "ember-cli-htmlbars": "^3.0.0",
     "ember-cli-typescript": "^2.0.1",
-    "ember-decorators-polyfill": "^1.0.5",
     "qs": "^6.7.0"
   },
   "devDependencies": {

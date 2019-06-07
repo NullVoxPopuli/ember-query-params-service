@@ -11,14 +11,14 @@ module.exports = function() {
     return {
       useYarn: true,
       scenarios: [
-        {
-          name: 'ember-release',
-          npm: {
-            devDependencies: {
-              'ember-source': urls[0],
-            },
-          },
-        },
+        // {
+        //   name: 'ember-release',
+        //   npm: {
+        //     devDependencies: {
+        //       'ember-source': urls[0],
+        //     },
+        //   },
+        // },
         {
           name: 'ember-beta',
           npm: {
