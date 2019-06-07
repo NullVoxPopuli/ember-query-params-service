@@ -2,7 +2,9 @@ ember-query-params-service
 ==============================================================================
 
 [![Build Status](https://travis-ci.com/NullVoxPopuli/ember-query-params-service.svg?branch=master)](https://travis-ci.com/NullVoxPopuli/ember-query-params-service)
-
+[![Maintainability](https://api.codeclimate.com/v1/badges/365a007a466d799748bf/maintainability)](https://codeclimate.com/github/NullVoxPopuli/ember-query-params-service/maintainability)
+[![Ember Observer Score](https://emberobserver.com/badges/ember-query-params-service.svg)](https://emberobserver.com/addons/ember-query-params-service) 
+[![npm](https://img.shields.io/npm/v/ember-query-params-service.svg)](https://www.npmjs.com/package/ember-query-params-service)
 
 Compatibility
 ------------------------------------------------------------------------------
