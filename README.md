@@ -7,8 +7,8 @@ ember-query-params-service
 Compatibility
 ------------------------------------------------------------------------------
 
-* Ember.js v3.4 or above
-* Ember CLI v3.4 or above
+* Ember.js v3.10 or above
+* Ember CLI v3.10 or above
 
 
 Installation
