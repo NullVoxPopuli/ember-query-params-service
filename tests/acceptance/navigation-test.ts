@@ -1,16 +1,11 @@
 import { module, test, skip } from 'qunit';
-import { visit, settled, currentRouteName, currentURL, currentPath } from '@ember/test-helpers';
+import { visit, settled, currentRouteName, currentURL } from '@ember/test-helpers';
 import { setupApplicationTest } from 'ember-qunit';
 import { getService } from '../helpers/get-service';
 import { QueryParamsService } from 'ember-query-params-service';
-import RouterService from '@ember/routing/router-service';
 
 function getQPService() {
   return getService<QueryParamsService>('query-params');
-}
-
-function getRouterService() {
-  return getService<RouterService>('router');
 }
 
 module('Acceptance | Navigation', function(hooks) {
