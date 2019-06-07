@@ -9,7 +9,7 @@ export default class QueryParamDecoratorTest extends Component {
   })
   foo?: number;
 
-  @queryParam() bar?: number;
+  @queryParam bar?: number;
 
   @action addToFoo() {
     this.foo = (this.foo || 0) + 1;

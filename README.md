@@ -7,8 +7,8 @@ ember-query-params-service
 Compatibility
 ------------------------------------------------------------------------------
 
-* Ember.js v3.4 or above
-* Ember CLI v3.4 or above
+* Ember.js v3.11 or above
+* Ember CLI v3.11 or above
 
 
 Installation
@@ -76,7 +76,7 @@ this would not only allow numeric operations on the query param (whereas, by def
 ```ts
 import Route from '@ember/routing/route';
 import { inject as service } from '@ember/service';
-import { alias } from 'ember-query-params-service';
+import { alias } from '@ember/object/computed';
 
 
 export default class ApplicationRoute extends Route {

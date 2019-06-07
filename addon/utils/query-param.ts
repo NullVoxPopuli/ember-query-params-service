@@ -2,6 +2,7 @@ import { get, set } from '@ember/object';
 import { getOwner } from '@ember/application';
 import { tracked } from '@glimmer/tracking';
 import { default as QueryParamsService } from '../services/query-params';
+import { decoratorWithParams } from '@ember-decorators/utils/decorator';
 
 export interface ITransformOptions<T> {
   deserialize?: (queryParam: string) => T;
@@ -76,37 +77,42 @@ function getQPService(context: any) {
 // function getController(context: any, name: string) {
 //   return getOwner(context).lookup(`controller:${name}`);
 // }
+//
+export const queryParam = decoratorWithParams(queryParamWithOptionalParams);
 
-export function queryParam<T = boolean>(...args: Args<T>) {
-  return (target: any, propertyKey: string, sourceDescriptor?: any): void => {
-    const { set: oldSet } = tracked(target, propertyKey, sourceDescriptor);
-    const [propertyPath, options] = extractArgs<T>(args, propertyKey);
+function queryParamWithOptionalParams<T = boolean>(
+  target: any,
+  propertyKey: string,
+  sourceDescriptor?: any,
+  ...args: Args<T>
+): void {
+  const { set: oldSet } = tracked(target, propertyKey, sourceDescriptor);
+  const [propertyPath, options] = extractArgs<T>(args, propertyKey);
 
-    // There is no initializer, so stage 1 decorators actually
-    // don't have the capability to do what I want :(
-    // setupController(target);
+  // There is no initializer, so stage 1 decorators actually
+  // don't have the capability to do what I want :(
+  // setupController(target);
 
-    const result = {
-      configurable: true,
-      enumerable: true,
-      get: function(): T {
-        // setupController(this, 'application');
-        const service = ensureService(this);
-        const value = get<any, any>(service, propertyPath);
-        const deserialized = tryDeserialize(value, options);
+  const result = {
+    configurable: true,
+    enumerable: true,
+    get: function(): T {
+      // setupController(this, 'application');
+      const service = ensureService(this);
+      const value = get<any, any>(service, propertyPath);
+      const deserialized = tryDeserialize(value, options);
 
-        return deserialized;
-      },
-      set: function(value: any) {
-        // setupController(this, 'application');
-        const service = ensureService(this);
-        const serialized = trySerialize(value, options);
+      return deserialized;
+    },
+    set: function(value: any) {
+      // setupController(this, 'application');
+      const service = ensureService(this);
+      const serialized = trySerialize(value, options);
 
-        set<any, any>(service, propertyPath, serialized);
-        oldSet!.call(this, serialized);
-      },
-    };
-
-    return result as any;
+      set<any, any>(service, propertyPath, serialized);
+      oldSet!.call(this, serialized);
+    },
   };
+
+  return result as any;
 }
