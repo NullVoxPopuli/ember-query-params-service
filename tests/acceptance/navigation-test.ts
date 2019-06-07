@@ -1,11 +1,16 @@
 import { module, test, skip } from 'qunit';
-import { visit, settled } from '@ember/test-helpers';
+import { visit, settled, currentRouteName, currentURL, currentPath } from '@ember/test-helpers';
 import { setupApplicationTest } from 'ember-qunit';
 import { getService } from '../helpers/get-service';
 import { QueryParamsService } from 'ember-query-params-service';
+import RouterService from '@ember/routing/router-service';
 
 function getQPService() {
   return getService<QueryParamsService>('query-params');
+}
+
+function getRouterService() {
+  return getService<RouterService>('router');
 }
 
 module('Acceptance | Navigation', function(hooks) {
@@ -15,10 +20,99 @@ module('Acceptance | Navigation', function(hooks) {
     await visit('/');
   });
 
+  hooks.afterEach(function() {
+    let service = getQPService();
+
+    Object.keys(service.current).forEach(key => {
+      service.current[key] = undefined;
+    });
+  });
+
   test('initially, no qeury params are set', function(assert) {
     let queryParams = Object.keys(getQPService().current);
 
     assert.ok(queryParams.length === 0, 'there are 0 query params');
+  });
+
+  module('setting query params', function(hooks) {
+    hooks.beforeEach(async function() {
+      await visit('/');
+    });
+
+    module('setting on a route that we are not currently on', function(hooks) {
+      hooks.beforeEach(function(assert) {
+        assert.equal(currentRouteName(), 'index');
+        assert.notOk(
+          window.location.search.includes('a=1'),
+          'the query param should not exist yet'
+        );
+
+        getQPService().byPath['/foo'] = { a: 1 };
+      });
+
+      test('the URL is not updated', function(assert) {
+        assert.equal(currentURL(), '/');
+        assert.notOk(
+          window.location.search.includes('a=1'),
+          'the query param should not exist yet'
+        );
+      });
+
+      test('the services current query params are not populated', function(assert) {
+        let service = getQPService();
+
+        assert.deepEqual(service.current, {}, 'the current set of query params is empty');
+        assert.equal(
+          service.byPath['/'].a,
+          undefined,
+          'the current path entry in byPath does not have the query param'
+        );
+      });
+
+      module('when navigating to the route that we had previously set query params on', function(
+        hooks
+      ) {
+        hooks.beforeEach(async function() {
+          await visit('foo');
+        });
+
+        test('the query params appear', function(assert) {
+          const qp = window.location.search;
+
+          assert.ok(qp.includes('a=1'), `a=1 should exist in the URL: ${qp || 'not set'}`);
+        });
+
+        test('the services current query params are populated', function(assert) {
+          let service = getQPService();
+
+          assert.equal(service.current.a, '1', 'the value on current query params is set');
+          assert.equal(service.byPath['/foo'].a, '1', 'the value is set on the byPath cache');
+        });
+      });
+    });
+
+    module('sets query params on the active route', function(hooks) {
+      hooks.beforeEach(function(assert) {
+        assert.equal(currentRouteName(), 'index');
+        assert.notOk(
+          window.location.search.includes('a=1'),
+          'the query param should not exist yet'
+        );
+
+        getQPService().current.a = '1';
+      });
+
+      test('the URL is updated', function(assert) {
+        assert.ok(window.location.search.includes('a=1'));
+      });
+
+      test('the services current query params are populated', function(assert) {
+        let service = getQPService();
+
+        assert.equal(service.current.a, '1');
+        assert.equal(service.byPath['/'].a, '1');
+      });
+    });
   });
 
   module('visiting a path with query params', function(hooks) {
