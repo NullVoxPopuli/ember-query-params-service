@@ -23,8 +23,9 @@ ember install ember-query-params-service
 
 ### DISCLAIMER
 
-This package is a work in progress and while it provides a more ergonomic way to access query params from anywhere in the app, there is still a dependency on controllers if you want to be able to link to routes with query params. This is due to an allow-list that's implemented in the route  resolver.  Coming soon is an RFC to propose this decorator to ember core, and remove that allow-list blocker.
+This package is a work in progress and while it provides a more ergonomic way to access query params from anywhere in the app, there is still a dependency on controllers if you want to be able to link to routes with query params. This is due to an allow-list that's implemented in the route  resolver.  
 
+RFC here: https://github.com/emberjs/rfcs/pull/380
 
 Usage
 ------------------------------------------------------------------------------
