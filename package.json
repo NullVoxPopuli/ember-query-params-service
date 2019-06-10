@@ -6,10 +6,9 @@
   ],
   "private": false,
   "description": "Small description for ember-query-params-service goes here",
-  "repository": "",
   "license": "MIT",
   "author": "NullVoxPopuli",
-  "repo": "https://github.com/NullVoxPopuli/ember-query-params-service",
+  "repository": "https://github.com/NullVoxPopuli/ember-query-params-service",
   "directories": {
     "doc": "doc",
     "test": "tests"
