@@ -65,11 +65,11 @@ export default class QueryParamsService extends Service {
    */
   private updateURL(transition: Transition) {
     const path = this.router.urlFor(transition.to.name);
-    const { protocol, host, pathname, search } = window.location;
+    const { protocol, host, pathname, search, hash } = window.location;
     const queryParams = this.byPath[path];
     const existing = qs.parse(search.split('?')[1]);
     const query = qs.stringify({ ...existing, ...queryParams });
-    const newUrl = `${protocol}//${host}${pathname}?${query}`;
+    const newUrl = `${protocol}//${host}${pathname}${hash}?${query}`;
 
     window.history.replaceState({ path: newUrl }, '', newUrl);
   }

@@ -180,4 +180,6 @@ module('Acceptance | Navigation', function(hooks) {
       });
     });
   });
+
+  module('locationType is the default and there is a hash in the URL', function() {});
 });
