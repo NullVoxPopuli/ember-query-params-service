@@ -24,7 +24,6 @@
   },
   "dependencies": {
     "@ember-decorators/utils": "^6.0.0",
-    "@types/handlebars": "npm:handlebars",
     "ember-auto-import": "^1.4.0",
     "ember-cli-babel": "^7.7.3",
     "ember-cli-htmlbars": "^3.0.0",
