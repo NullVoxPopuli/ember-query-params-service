@@ -73,9 +73,6 @@
     "qunit-dom": "^0.8.5",
     "typescript": "^3.5.1"
   },
-  "resolutions": {
-    "@types/handlebars": "npm:handlebars"
-  },
   "engines": {
     "node": "6.* || 8.* || >= 10.*"
   },
