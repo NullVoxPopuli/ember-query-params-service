@@ -60,7 +60,7 @@ import Component from "@glimmer/component";
 import { queryParam } from "ember-query-params-service";
 
 export default class SomeComponent extends Component {
-  @queryParam("foo", {
+  @queryParam({
     deserialize: (qp) =>  parseInt(( qp || '' ).replace(/-/g, '')),
     serialize: (value) => `-${value}-`,
   })
@@ -123,6 +123,16 @@ export default class ApplicationRoute extends Route {
 
  - or via the `@queryParam` decorator:
 
+    ```ts
+      @queryParam isSpeakerNotes;
+
+      // ...somewhere
+      this.isSpeakerNotes = false;
+    ```
+    and then the URL will show `isSpeakerNotes=false`
+    
+ - or via the `@queryParam` decorator with renaming the param in the URL
+ 
     ```ts
       @queryParam('r') isSpeakerNotes;
 
