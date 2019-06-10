@@ -32,6 +32,21 @@ Usage
 
 ### _The `@queryParam` Decorator_
 
+Signature:
+```ts
+@queryParam: void;
+@queryParam(param: string);
+@queryParam(param: string, options: TransformOptions);
+@queryParam(options: TransformOptions);
+
+TransformOptions<T> = {
+  deserialize?: (param: string) => T;
+  serialize?: (value: T) => string;
+}
+```
+
+example:
+
 ```ts
 import Route from '@ember/routing/route';
 import { queryParam } from 'ember-query-params-service';
