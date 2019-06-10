@@ -52,8 +52,8 @@ import Route from '@ember/routing/route';
 import { queryParam } from 'ember-query-params-service';
 
 export default class ApplicationRoute extends Route {
-  @queryParam('r') isSpeakerNotes;
-  @queryParam('slide') slideNumber;
+  @queryParam isSpeakerNotes;
+  @queryParam slideNumber;
 
   model() {
     return {
