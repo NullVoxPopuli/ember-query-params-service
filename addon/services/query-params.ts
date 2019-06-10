@@ -3,6 +3,7 @@ import RouterService from '@ember/routing/router-service';
 
 import { tracked } from '@glimmer/tracking';
 import * as qs from 'qs';
+import Transition from '@ember/routing/-private/transition';
 
 interface QueryParams {
   [key: string]: number | string | undefined | QueryParams;
@@ -62,8 +63,8 @@ export default class QueryParamsService extends Service {
    * throw them on the URL
    *
    */
-  private updateURL(transition: any /* Transition doesn't have intent.. some how? */) {
-    const path = transition.intent.url;
+  private updateURL(transition: Transition) {
+    const path = this.router.urlFor(transition.to.name);
     const { protocol, host, pathname, search } = window.location;
     const queryParams = this.byPath[path];
     const existing = qs.parse(search.split('?')[1]);
