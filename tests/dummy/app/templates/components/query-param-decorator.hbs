@@ -16,3 +16,8 @@
   <button {{on 'click' this.clearBar}}>Clear</button>
 </div>
 
+<div data-test-strongest-avenger>
+  <span>Strongest Avenger: {{this.strongestAvenger}}</span> |
+  <button data-test-set {{on 'click' this.thorWalksIn}}>Thor walks in...</button>
+  <button data-test-unset {{on 'click' this.clearStrongestAvenger}}>Kick Thor out</button>
+</div>

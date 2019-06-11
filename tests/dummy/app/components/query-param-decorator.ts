@@ -11,6 +11,8 @@ export default class QueryParamDecoratorTest extends Component {
 
   @queryParam bar?: number;
 
+  @queryParam('strongest-avenger') strongestAvenger: string | undefined = 'Captain Marvel';
+
   @action addToFoo() {
     this.foo = (this.foo || 0) + 1;
   }
@@ -33,5 +35,13 @@ export default class QueryParamDecoratorTest extends Component {
 
   @action clearBar() {
     this.bar = undefined;
+  }
+
+  @action thorWalksIn() {
+    this.strongestAvenger = 'Thor';
+  }
+
+  @action clearStrongestAvenger() {
+    this.strongestAvenger = undefined;
   }
 }

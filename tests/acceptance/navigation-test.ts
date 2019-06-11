@@ -1,5 +1,5 @@
 import { module, test, skip } from 'qunit';
-import { visit, settled, currentRouteName, currentURL } from '@ember/test-helpers';
+import { visit, settled, currentRouteName, currentURL, click } from '@ember/test-helpers';
 import { setupApplicationTest } from 'ember-qunit';
 import { getService } from '../helpers/get-service';
 import { QueryParamsService } from 'ember-query-params-service';
@@ -106,6 +106,52 @@ module('Acceptance | Navigation', function(hooks) {
 
         assert.equal(service.current.a, '1');
         assert.equal(service.byPath['/'].a, '1');
+      });
+    });
+  });
+
+  module('default values', function() {
+    test('a default value does not affect the URL', function(assert) {
+      const text = document.querySelector('[data-test-strongest-avenger] span')!.textContent || '';
+
+      assert.ok(text.includes('Captain Marvel'), 'default value is present');
+      assert.notOk(
+        window.location.search.includes('Captain'),
+        'the query param should not exist'
+      );
+    });
+
+    module('the value is set', function(hooks) {
+      hooks.beforeEach(async function() {
+        await click('[data-test-strongest-avenger] [data-test-set]');
+      });
+
+      test('the default value is no longer present', function(assert) {
+        const text = document.querySelector('[data-test-strongest-avenger] span')!.textContent || '';
+
+        assert.ok(text.includes('Thor'), 'set value is present');
+        assert.notOk(text.includes('Captain'), 'default value is not present');
+        assert.ok(
+          window.location.search.includes('Thor'),
+          'the query param should exist'
+        );
+      });
+
+      module('the value is unset', function(hooks) {
+        hooks.beforeEach(async function() {
+          await click('[data-test-strongest-avenger] [data-test-unset]');
+        });
+
+        test('the default value is present once again', function(assert) {
+          const text = document.querySelector('[data-test-strongest-avenger] span')!.textContent || '';
+
+          assert.ok(text.includes('Captain'), 'default value is present');
+          assert.notOk(text.includes('Thor'), 'set value is no longer present');
+          assert.notOk(
+            window.location.search.includes('Captain'),
+            'the query param should not exist'
+          );
+        });
       });
     });
   });
