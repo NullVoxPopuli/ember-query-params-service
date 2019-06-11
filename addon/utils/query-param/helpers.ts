@@ -38,11 +38,11 @@ export function trySerialize<T>(value: any, options: ITransformOptions<T>) {
   return options.serialize(value);
 }
 
-// could there ever be a problem with using only one variable in module-space?
 // can't cache the service in module space because we run in to race  conditions
 // where a service on an old app instance may still exist, but be tied to the
 // old application istead of the current one (such as in tests)
 const serviceCache = new WeakMap();
+
 export function ensureService(context: any): QueryParamsService {
   let service = serviceCache.get(context);
 
