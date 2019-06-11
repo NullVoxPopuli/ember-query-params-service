@@ -50,6 +50,7 @@ export default class QueryParamsService extends Service {
   }
 
   private updateParams() {
+    console.log('didChange...');
     this.setupProxies();
 
     const [path, params] = this.pathParts;
@@ -64,6 +65,7 @@ export default class QueryParamsService extends Service {
    *
    */
   private updateURL(transition: Transition) {
+    console.log('willChange');
     const path = this.router.urlFor(transition.to.name);
     const { protocol, host, pathname, search, hash } = window.location;
     const queryParams = this.byPath[path];
