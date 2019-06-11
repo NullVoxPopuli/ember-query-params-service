@@ -27,4 +27,5 @@
 # I don't know why these end up here..
 services/*.d.ts
 utils/*.d.ts
+utils/**/*.d.ts
 initializers/*.d.ts
