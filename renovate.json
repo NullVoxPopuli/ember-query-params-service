@@ -1,6 +1,14 @@
 {
   "extends": [
-    "config:base"
+    "config:base",
+    ":semanticCommits"
   ],
-  "pin": false
+  "automerge": true,
+  "masterIssue": true,
+  "packageRules": [
+    {
+      "paths": ["package.json"],
+      "rangeStrategy": "bump"
+    }
+  ]
 }
