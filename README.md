@@ -27,6 +27,8 @@ This package is a work in progress and while it provides a more ergonomic way to
 
 RFC here: https://github.com/emberjs/rfcs/pull/380
 
+Also, this is an experiment, and SemVer guarantees cannot be assured (yet).
+
 Usage
 ------------------------------------------------------------------------------
 

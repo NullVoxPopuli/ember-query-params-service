@@ -4,7 +4,7 @@ module.exports = {
   plugins: ['ember', 'prettier', '@typescript-eslint'],
   extends: [
     'eslint:recommended',
-    'plugin:ember/recommended',
+    'plugin:ember/octane',
     'plugin:@typescript-eslint/recommended',
     'prettier',
     'prettier/@typescript-eslint',
@@ -13,6 +13,9 @@ module.exports = {
     browser: true,
   },
   rules: {
+    // eslint
+    'prefer-const': 'off',
+
     // ember specific
     'ember/avoid-leaking-state-in-ember-objects': 'warn',
     'ember/no-ember-testing-in-module-scope': 'off', // needed for tasks atm
@@ -49,6 +52,7 @@ module.exports = {
     // node files
     {
       files: [
+        'commitlint.config.js',
         '.ember-cli.js',
         '.eslintrc.js',
         '.prettierrc.js',
