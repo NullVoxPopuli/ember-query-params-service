@@ -72,7 +72,7 @@
     "loader.js": "^4.7.0",
     "prettier": "^2.0.5",
     "qunit-dom": "^1.2.0",
-    "semantic-release": "^17.0.7",
+    "semantic-release": "^17.0.8",
     "typescript": "3.9.5"
   },
   "engines": {
