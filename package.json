@@ -37,7 +37,7 @@
   "devDependencies": {
     "@ember/optional-features": "^2.0.0",
     "@glimmer/component": "^1.0.4",
-    "@types/ember": "^3.16.4",
+    "@types/ember": "^3.16.5",
     "@types/ember-qunit": "^3.4.13",
     "@types/ember-test-helpers": "^1.0.9",
     "@types/ember-testing-helpers": "^0.0.4",
