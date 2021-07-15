@@ -27,7 +27,7 @@ jobs:
       run: yarn lint:hbs
     - name: Types
       run: yarn lint:types
-    - uses: wagoid/commitlint-github-action@v3
+    - uses: wagoid/commitlint-github-action@v4
       env:
         GITHUB_TOKEN: ${{ secrets.GH_PAT }}
 
