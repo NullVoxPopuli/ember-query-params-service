@@ -4,14 +4,8 @@ import RouterService from '@ember/routing/router-service';
 import { tracked } from '@glimmer/tracking';
 import * as qs from 'qs';
 import Transition from '@ember/routing/-private/transition';
-
-interface QueryParams {
-  [key: string]: number | string | undefined | QueryParams;
-}
-
-interface QueryParamsByPath {
-  [key: string]: QueryParams;
-}
+import { urlFromCache } from 'ember-query-params-service/-private/url-from-cache';
+import { dynamicSegmentsFromRouteInfo } from 'ember-query-params-service/-private/dynamic-segments-from-route-info';
 
 export default class QueryParamsService extends Service {
   @service router!: RouterService;
@@ -64,12 +58,9 @@ export default class QueryParamsService extends Service {
    *
    */
   private updateURL(transition: Transition) {
-    const path = this.router.urlFor(transition.to.name);
-    const { protocol, host, pathname, search, hash } = window.location;
-    const queryParams = this.byPath[path];
-    const existing = qs.parse(search.split('?')[1]);
-    const query = qs.stringify({ ...existing, ...queryParams });
-    const newUrl = `${protocol}//${host}${pathname}${hash}?${query}`;
+    const routeParams = dynamicSegmentsFromRouteInfo(transition.to);
+    const path = this.router.urlFor(transition.to.name, ...routeParams);
+    const newUrl = urlFromCache(path, routeParams, this.byPath);
 
     window.history.replaceState({ path: newUrl }, '', newUrl);
   }
