@@ -11,10 +11,10 @@ function queryParamWithOptionalParams<T = boolean>(
   _target: any,
   propertyKey: string,
   sourceDescriptor?: any,
-  ...args: Args<T>
+  ...args: Args<T>[]
 ): void {
   const { get: oldGet, initializer } = sourceDescriptor;
-  const [propertyPath, options] = extractArgs<T>(args, propertyKey);
+  const [propertyPath, options] = extractArgs<T>(args[0] || [], propertyKey);
 
   // There is no initializer, so stage 1 decorators actually
   // don't have the capability to do what I want :(

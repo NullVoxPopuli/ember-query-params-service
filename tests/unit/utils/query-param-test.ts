@@ -69,4 +69,28 @@ module('Unit | Utility | @queryParam', function(hooks) {
     });
   });
 
+  module('a different name can be used on the url', function(hooks) {
+    class Scenario {
+      @queryParam('strongest-avenger') strongestAvenger: string | undefined = 'Captain Marvel';
+    }
+
+    let scenario: Scenario;
+
+    hooks.beforeEach(function () {
+      scenario = new Scenario();
+      setOwner(scenario, getOwner());
+      scenario.strongestAvenger = 'Thor';
+    });
+
+    test('the URL contains the correct name', function(assert) {
+      assert.ok(
+        window.location.search.includes('strongest-avenger'),
+        'the correct name is used in the URL'
+      );
+      assert.ok(
+        window.location.search.includes('strongest-avenger=Thor'),
+        'the correct name has the correct value'
+      );
+    });
+  });
 });

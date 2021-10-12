@@ -23,7 +23,7 @@ module('Acceptance | Navigation', function(hooks) {
     });
   });
 
-  test('initially, no qeury params are set', function(assert) {
+  test('initially, no query params are set', function(assert) {
     let queryParams = Object.keys(getQPService().current);
 
     assert.ok(queryParams.length === 0, 'there are 0 query params');
