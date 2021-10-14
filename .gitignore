@@ -12,6 +12,7 @@
 /.env*
 /.pnp*
 /.sass-cache
+/.eslintcache
 /connect.lock
 /coverage/
 /libpeerconnection.log
@@ -23,9 +24,3 @@
 /.node_modules.ember-try/
 /bower.json.ember-try
 /package.json.ember-try
-
-# I don't know why these end up here..
-services/*.d.ts
-utils/*.d.ts
-utils/**/*.d.ts
-initializers/*.d.ts

@@ -1,3 +1,4 @@
+/* global Promise */
 'use strict';
 
 const getChannelURL = require('ember-source-channel-url');

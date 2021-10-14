@@ -1,13 +1,17 @@
+// 'use strict';
+
+// const { configs } = require('@nullvoxpopuli/eslint-configs');
+
+// // accommodates: JS, TS, App, and Addon
+// module.exports = configs.ember();
 module.exports = {
   root: true,
   parser: '@typescript-eslint/parser',
   plugins: ['ember', 'prettier', '@typescript-eslint'],
   extends: [
     'eslint:recommended',
-    'plugin:ember/octane',
     'plugin:@typescript-eslint/recommended',
     'prettier',
-    'prettier/@typescript-eslint',
   ],
   env: {
     browser: true,
@@ -57,6 +61,7 @@ module.exports = {
         './.prettierrc.js',
         './.template-lintrc.js',
         './ember-cli-build.js',
+        './config/ember-try.js',
         './index.js',
         './testem.js',
         './blueprints/*/index.js',
@@ -71,12 +76,16 @@ module.exports = {
         node: true,
       },
       plugins: ['node'],
-      rules: Object.assign({}, require('eslint-plugin-node').configs.recommended.rules, {
-        '@typescript-eslint/camelcase': 'off',
-        '@typescript-eslint/no-var-requires': 'off',
-        'node/no-unpublished-require': 'off', // we live dangerously here
-        'node/no-extraneous-require': 'off', // incorrect?
-      }),
+      rules: Object.assign(
+        {},
+        require('eslint-plugin-node').configs.recommended.rules,
+        {
+          '@typescript-eslint/camelcase': 'off',
+          '@typescript-eslint/no-var-requires': 'off',
+          'node/no-unpublished-require': 'off', // we live dangerously here
+          'node/no-extraneous-require': 'off', // incorrect?
+        }
+      ),
     },
   ],
 };
