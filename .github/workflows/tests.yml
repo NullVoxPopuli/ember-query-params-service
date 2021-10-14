@@ -58,7 +58,7 @@ jobs:
     - name: Install
       run: yarn install
     - name: Test with ${{ matrix.scenario }}
-      run: yarn test:try-one ${{ matrix.scenario }}
+      run: node_modules/.bin/ember try:one ${{ matrix.scenario }} --skip-cleanup
 
   publish:
     name: Release
