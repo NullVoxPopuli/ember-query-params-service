@@ -1790,7 +1790,7 @@
   resolved "https://registry.yarnpkg.com/@semantic-release/error/-/error-2.2.0.tgz#ee9d5a09c9969eade1ec864776aeda5c5cddbbf0"
   integrity sha512-9Tj/qn+y2j+sjCI3Jd+qseGtHjOAeg7dU2/lVcqIQ9TV3QDaDXDYXcoOHU+7o2Hwh8L8ymL4gfuO7KxDs3q2zg==
 
-"@semantic-release/git@^9.0.0":
+"@semantic-release/git@^9.0.1":
   version "9.0.1"
   resolved "https://registry.yarnpkg.com/@semantic-release/git/-/git-9.0.1.tgz#7b5486578460084d8914c1aa4c4fff5087afa32a"
   integrity sha512-75P03s9v0xfrH9ffhDVWRIX0fgWBvJMmXhUU0rMTKYz47oMXU5O95M/ocgIKnVJlWZYoC+LpIe4Ye6ev8CrlUQ==
@@ -11752,7 +11752,7 @@ schema-utils@^2.6.5:
     ajv "^6.12.4"
     ajv-keywords "^3.5.2"
 
-semantic-release@^17.4.4:
+semantic-release@^17.4.7:
   version "17.4.7"
   resolved "https://registry.yarnpkg.com/semantic-release/-/semantic-release-17.4.7.tgz#88e1dce7294cc43acc54c4e0a83f582264567206"
   integrity sha512-3Ghu8mKCJgCG3QzE5xphkYWM19lGE3XjFdOXQIKBM2PBpBvgFQ/lXv31oX0+fuN/UjNFO/dqhNs8ATLBhg6zBg==
