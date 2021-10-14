@@ -45,15 +45,15 @@ module.exports = function () {
         },
         {
           name: 'ember-release',
-          npm: { devDependencies: { 'ember-source': urls[0] } },
+          npm: { devDependencies: { 'ember-source': urls[0] }, dependencies: { 'ember-auto-import': '^2.2.2' } },
         },
         {
           name: 'ember-beta',
-          npm: { devDependencies: { 'ember-source': urls[1] } },
+          npm: { devDependencies: { 'ember-source': urls[1] }, dependencies: { 'ember-auto-import': '^2.2.2' }             },
         },
         {
           name: 'ember-canary',
-          npm: { devDependencies: { 'ember-source': urls[2] } },
+          npm: { devDependencies: { 'ember-source': urls[2] }, dependencies: { 'ember-auto-import': '^2.2.2' }            },
         },
         // The default `.travis.yml` runs this scenario via `yarn test`,
         // not via `ember try`. It's still included here so that running
