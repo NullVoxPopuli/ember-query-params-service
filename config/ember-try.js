@@ -2,6 +2,8 @@
 
 const getChannelURL = require('ember-source-channel-url');
 
+const { embroiderSafe, embroiderOptimized } = require('@embroider/test-setup');
+
 module.exports = function () {
   return Promise.all([
     getChannelURL('release'),
@@ -11,6 +13,8 @@ module.exports = function () {
     return {
       useYarn: true,
       scenarios: [
+        embroiderSafe(),
+        embroiderOptimized(),
         {
           name: 'ember-3.13',
           npm: { devDependencies: { 'ember-source': '~3.13' } },
@@ -26,6 +30,18 @@ module.exports = function () {
         {
           name: 'ember-3.18',
           npm: { devDependencies: { 'ember-source': '~3.18' } },
+        },
+        {
+          name: 'ember-3.20',
+          npm: { devDependencies: { 'ember-source': '~3.20' } },
+        },
+        {
+          name: 'ember-3.24',
+          npm: { devDependencies: { 'ember-source': '~3.24' } },
+        },
+        {
+          name: 'ember-3.28',
+          npm: { devDependencies: { 'ember-source': '~3.28' } },
         },
         {
           name: 'ember-release',
