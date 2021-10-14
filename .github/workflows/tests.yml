@@ -13,26 +13,29 @@ env:
   CI: true
 
 jobs:
-  lint:
-    name: Lint
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v1
-    - uses: volta-cli/action@v1
-    - name: Install
-      run: yarn install
-    - name: ESLint
-      run: yarn lint:js
-    - name: Templates
-      run: yarn lint:hbs
-    - name: Types
-      run: yarn lint:types
-    - uses: wagoid/commitlint-github-action@v4
-      env:
-        GITHUB_TOKEN: ${{ secrets.GH_PAT }}
-
   tests:
-    name: Ember Compatability
+    if: "! contains(toJSON(github.event.commits.*.message), '[skip ci]')"
+    name: Base Tests
+    timeout-minutes: 5
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node:
+          - "14"
+          # - "16"
+    steps:
+      - uses: actions/checkout@v2
+      - uses: volta-cli/action@v1
+        with:
+          node-version: ${{ matrix.node }}
+
+      - run: yarn install --frozen-lockfile
+
+      - name: Test with ${{ matrix.node }}
+        run: yarn ember test
+
+  try-scenarios:
+    name: Compatibility
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -41,16 +44,21 @@ jobs:
         - "ember-3.14"
         - "ember-3.16"
         - "ember-3.18"
+        - "ember-3.20"
+        - "ember-3.24"
+        - "ember-3.28"
         - "ember-release"
         - "ember-beta"
         - "ember-canary"
+        - "embroider-safe"
+        - "embroider-optimized"
     steps:
     - uses: actions/checkout@v2
     - uses: volta-cli/action@v1
     - name: Install
       run: yarn install
     - name: Test with ${{ matrix.scenario }}
-      run: yarn test:try-one ${{ matrix.scenario }}
+      run: node_modules/.bin/ember try:one ${{ matrix.scenario }} --skip-cleanup
 
   publish:
     name: Release

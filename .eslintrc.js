@@ -1,13 +1,17 @@
+// 'use strict';
+
+// const { configs } = require('@nullvoxpopuli/eslint-configs');
+
+// // accommodates: JS, TS, App, and Addon
+// module.exports = configs.ember();
 module.exports = {
   root: true,
   parser: '@typescript-eslint/parser',
   plugins: ['ember', 'prettier', '@typescript-eslint'],
   extends: [
     'eslint:recommended',
-    'plugin:ember/octane',
     'plugin:@typescript-eslint/recommended',
     'prettier',
-    'prettier/@typescript-eslint',
   ],
   env: {
     browser: true,
@@ -52,30 +56,36 @@ module.exports = {
     // node files
     {
       files: [
-        'commitlint.config.js',
-        '.ember-cli.js',
-        '.eslintrc.js',
-        '.prettierrc.js',
-        '.template-lintrc.js',
-        'ember-cli-build.js',
-        'index.js',
-        'testem.js',
-        'blueprints/*/index.js',
-        'config/**/*.js',
-        'tests/dummy/config/**/*.js',
+        './*.js',
+        './.eslintrc.js',
+        './.prettierrc.js',
+        './.template-lintrc.js',
+        './ember-cli-build.js',
+        './config/ember-try.js',
+        './index.js',
+        './testem.js',
+        './blueprints/*/index.js',
+        './config/**/*.js',
+        './tests/dummy/config/**/*.js',
       ],
-      excludedFiles: ['addon/**', 'addon-test-support/**', 'app/**', 'tests/dummy/app/**'],
+      parserOptions: {
+        sourceType: 'script',
+      },
       env: {
         browser: false,
         node: true,
       },
       plugins: ['node'],
-      rules: Object.assign({}, require('eslint-plugin-node').configs.recommended.rules, {
-        '@typescript-eslint/camelcase': 'off',
-        '@typescript-eslint/no-var-requires': 'off',
-        'node/no-unpublished-require': 'off', // we live dangerously here
-        'node/no-extraneous-require': 'off', // incorrect?
-      }),
+      rules: Object.assign(
+        {},
+        require('eslint-plugin-node').configs.recommended.rules,
+        {
+          '@typescript-eslint/camelcase': 'off',
+          '@typescript-eslint/no-var-requires': 'off',
+          'node/no-unpublished-require': 'off', // we live dangerously here
+          'node/no-extraneous-require': 'off', // incorrect?
+        }
+      ),
     },
   ],
 };

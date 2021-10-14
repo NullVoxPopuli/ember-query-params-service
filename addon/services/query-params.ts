@@ -6,7 +6,7 @@ import * as qs from 'qs';
 import Transition from '@ember/routing/-private/transition';
 
 interface QueryParams {
-  [key: string]: number | string | undefined | QueryParams;
+  [key: string]: number | string | QueryParams | qs.ParsedQs[keyof qs.ParsedQs];
 }
 
 interface QueryParamsByPath {
@@ -31,7 +31,9 @@ export default class QueryParamsService extends Service {
     this.updateParams();
 
     this.router.on('routeDidChange', () => this.updateParams());
-    this.router.on('routeWillChange', transition => this.updateURL(transition));
+    this.router.on('routeWillChange', (transition) =>
+      this.updateURL(transition)
+    );
   }
 
   get pathParts() {
@@ -53,7 +55,7 @@ export default class QueryParamsService extends Service {
     this.setupProxies();
 
     const [path, params] = this.pathParts;
-    const queryParams = params && qs.parse(params);
+    const queryParams = params ? qs.parse(params) : {};
 
     this.setOnPath(path, queryParams);
   }
@@ -74,10 +76,10 @@ export default class QueryParamsService extends Service {
     window.history.replaceState({ path: newUrl }, '', newUrl);
   }
 
-  private setOnPath(path: string, queryParams: object) {
+  private setOnPath(path: string, queryParams: qs.ParsedQs) {
     this.byPath[path] = this.byPath[path] || {};
 
-    Object.keys(queryParams || {}).forEach(key => {
+    Object.keys(queryParams || {}).forEach((key) => {
       let value = queryParams[key];
       let currentValue = this.byPath[path][key];
 
