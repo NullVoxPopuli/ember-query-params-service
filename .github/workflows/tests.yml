@@ -22,7 +22,7 @@ jobs:
       matrix:
         node:
           - "14"
-          - "16"
+          # - "16"
     steps:
       - uses: actions/checkout@v2
       - uses: volta-cli/action@v1
