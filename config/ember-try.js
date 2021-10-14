@@ -47,21 +47,21 @@ module.exports = function () {
         {
           name: 'ember-release',
           npm: {
-            devDependencies: { 'ember-source': urls[0] },
+            devDependencies: { 'ember-source': urls[0], webpack: '^5.58.2' },
             dependencies: { 'ember-auto-import': '^2.2.2' },
           },
         },
         {
           name: 'ember-beta',
           npm: {
-            devDependencies: { 'ember-source': urls[1] },
+            devDependencies: { 'ember-source': urls[1], webpack: '^5.58.2' },
             dependencies: { 'ember-auto-import': '^2.2.2' },
           },
         },
         {
           name: 'ember-canary',
           npm: {
-            devDependencies: { 'ember-source': urls[2] },
+            devDependencies: { 'ember-source': urls[2], webpack: '^5.58.2' },
             dependencies: { 'ember-auto-import': '^2.2.2' },
           },
         },
