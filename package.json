@@ -36,6 +36,7 @@
   },
   "devDependencies": {
     "@ember/optional-features": "^2.0.0",
+    "@embroider/test-setup": "^0.47.0",
     "@glimmer/component": "^1.0.4",
     "@types/ember": "^3.16.5",
     "@types/ember-qunit": "^3.4.14",
