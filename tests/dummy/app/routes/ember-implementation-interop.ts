@@ -1,7 +1,5 @@
 import Route from '@ember/routing/route';
 
-export default class EmberImplementationInterop extends Route.extend({
-  // anything which *must* be merged to prototype here
-}) {
+export default class EmberImplementationInterop extends Route {
   // normal class body definition here
 }

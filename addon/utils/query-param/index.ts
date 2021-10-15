@@ -1,11 +1,16 @@
 import { get, set } from '@ember/object';
 import { decoratorWithParams } from '@ember-decorators/utils/decorator';
-import { Args, extractArgs, ensureService, tryDeserialize, trySerialize } from './helpers';
+
+import { ensureService, extractArgs, tryDeserialize, trySerialize } from './helpers';
+
+import type { Args } from './helpers';
 
 // type DecoratorCreator = (...args: Args<string>) => PropertyDecorator;
 // type DecoratorWithParams = PropertyDecorator | DecoratorCreator;
 
-export const queryParam =( decoratorWithParams(queryParamWithOptionalParams) as unknown) as any /* ugh */;
+export const queryParam = decoratorWithParams(
+  queryParamWithOptionalParams
+) as unknown as any; /* ugh */
 
 function queryParamWithOptionalParams<T = boolean>(
   _target: any,
@@ -36,7 +41,7 @@ function queryParamWithOptionalParams<T = boolean>(
 
       return deserialized || oldGet?.() || initializer?.();
     },
-    set: function (value?: T ) {
+    set: function (value?: T) {
       // setupController(this, 'application');
       const service = ensureService(this);
       const serialized = trySerialize(value, options);

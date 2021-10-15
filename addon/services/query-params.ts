@@ -1,9 +1,10 @@
-import Service, { inject as service } from '@ember/service';
-import RouterService from '@ember/routing/router-service';
-
 import { tracked } from '@glimmer/tracking';
+import Service, { inject as service } from '@ember/service';
+
 import * as qs from 'qs';
-import Transition from '@ember/routing/-private/transition';
+
+import type Transition from '@ember/routing/-private/transition';
+import type RouterService from '@ember/routing/router-service';
 
 interface QueryParams {
   [key: string]: number | string | QueryParams | qs.ParsedQs[keyof qs.ParsedQs];
@@ -23,17 +24,12 @@ export default class QueryParamsService extends Service {
     super(...args);
 
     this.setupProxies();
-  }
-
-  init() {
-    super.init();
-
     this.updateParams();
 
+    // TODO: drop support for Ember < 3.24 and use @ember/destroyable
+    //       to not cause a memory leak in tests
     this.router.on('routeDidChange', () => this.updateParams());
-    this.router.on('routeWillChange', (transition) =>
-      this.updateURL(transition)
-    );
+    this.router.on('routeWillChange', (transition) => this.updateURL(transition));
   }
 
   get pathParts() {
@@ -89,6 +85,7 @@ export default class QueryParamsService extends Service {
 
       if (value === undefined) {
         delete this.byPath[path][key];
+
         return;
       }
 
