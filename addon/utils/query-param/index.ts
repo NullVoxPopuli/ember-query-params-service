@@ -11,10 +11,11 @@ function queryParamWithOptionalParams<T = boolean>(
   _target: any,
   propertyKey: string,
   sourceDescriptor?: any,
-  ...args: Args<T>[]
+  ...args: Args<T>
 ): void {
   const { get: oldGet, initializer } = sourceDescriptor;
-  const [propertyPath, options] = extractArgs<T>(args[0] || [], propertyKey);
+  // TODO: why is args sometimes an array of arrays?
+  const [propertyPath, options] = extractArgs<T>(args.flat() as Args<T>, propertyKey);
 
   // There is no initializer, so stage 1 decorators actually
   // don't have the capability to do what I want :(
