@@ -3,6 +3,7 @@ import { getOwner } from '@ember/application';
 import type { default as QueryParamsService } from '../../services/query-params';
 
 export interface ITransformOptions<T> {
+  defaultValue? : string;
   deserialize?: (queryParam: string) => T;
   serialize?: (queryParam: T) => string;
 }
@@ -27,12 +28,19 @@ export function extractArgs<T>(args: Args<T>, propertyKey: string): [string, ITr
 }
 
 export function tryDeserialize<T>(value: any, options: ITransformOptions<T>) {
+  value = value === undefined ? options.defaultValue : value;
+
   if (!options.deserialize) return value;
 
   return options.deserialize(value);
 }
 
 export function trySerialize<T>(value: any, options: ITransformOptions<T>) {
+  debugger;
+  if (value === options.defaultValue) {
+    value = undefined;
+  }
+
   if (!options.serialize) return value;
 
   return options.serialize(value);
