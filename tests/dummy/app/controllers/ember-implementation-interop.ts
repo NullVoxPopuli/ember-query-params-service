@@ -1,8 +1,6 @@
 import Controller from '@ember/controller';
 
-export default class EmberImplementationInterop extends Controller.extend({
-  // anything which *must* be merged to prototype here
-}) {
+export default class EmberImplementationInterop extends Controller {
   // normal class body definition here
 }
 

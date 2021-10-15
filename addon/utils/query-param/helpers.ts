@@ -1,5 +1,6 @@
 import { getOwner } from '@ember/application';
-import { default as QueryParamsService } from '../../services/query-params';
+
+import type { default as QueryParamsService } from '../../services/query-params';
 
 export interface ITransformOptions<T> {
   deserialize?: (queryParam: string) => T;
@@ -7,7 +8,6 @@ export interface ITransformOptions<T> {
 }
 
 export type Args<T> = [] | [string, ITransformOptions<T>] | [ITransformOptions<T>] | [string];
-
 
 export function extractArgs<T>(args: Args<T>, propertyKey: string): [string, ITransformOptions<T>] {
   const [maybePathMaybeOptions, maybeOptions] = args;
