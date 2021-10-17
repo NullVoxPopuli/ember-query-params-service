@@ -42,6 +42,7 @@ Signature:
 @queryParam(options: TransformOptions);
 
 TransformOptions<T> = {
+  defaultValue?: any;
   deserialize?: (param: string) => T;
   serialize?: (value: T) => string;
 }
@@ -70,7 +71,30 @@ export default class ApplicationRoute extends Route {
 {{this.model.isSpeakerNotes}} - {{this.model.slideNumber}}
 ```
 
-optionally, a deserialize function may be passed to the decorator:
+optionally, an options hash may be passed to the decorator defining any of the three options, 
+defaultValue, serialize, deserialize. 
+
+An example of using the default value would be:
+
+```ts
+import Component from "@glimmer/component";
+import { queryParam } from "ember-query-params-service";
+
+export default class SomeComponent extends Component {
+  @queryParam({
+    defaultValue: false,
+  })
+  active;
+
+}
+```
+When the value is undefined, the defaultValue will be used when accessing the value
+
+When the value is undefined or equal to the defaultValue, the param will not be present on the URL. 
+In this way the URL will only contain params that are different than the default value. 
+
+
+An example of using serialize / deserialize would be:
 
 ```ts
 import Component from "@glimmer/component";
