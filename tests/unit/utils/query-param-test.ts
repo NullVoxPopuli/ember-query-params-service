@@ -1,5 +1,6 @@
 import { setOwner } from '@ember/application';
-import { getContext, visit } from '@ember/test-helpers';
+import Controller from '@ember/controller';
+import { currentURL, getContext, visit } from '@ember/test-helpers';
 import { module, test } from 'qunit';
 import { setupApplicationTest } from 'ember-qunit';
 
@@ -23,6 +24,13 @@ module('Unit | Utility | @queryParam', function (hooks) {
   setupApplicationTest(hooks);
 
   hooks.beforeEach(async function () {
+    this.owner.register(
+      'controller:application',
+      class extends Controller {
+        queryParams = ['strongestAvenger', 'captainMarvel'];
+      }
+    );
+
     await visit('/');
   });
 
@@ -65,6 +73,75 @@ module('Unit | Utility | @queryParam', function (hooks) {
 
         test('the default value is back', function (assert) {
           assert.equal(scenario.strongestAvenger, 'Captain Marvel');
+        });
+      });
+    });
+  });
+
+  module('the value can be a boolean', function (hooks) {
+    class Scenario {
+      @queryParam captainMarvel: boolean | undefined = true;
+    }
+
+    let scenario: Scenario;
+
+    hooks.beforeEach(function () {
+      scenario = new Scenario();
+      setOwner(scenario, getOwner());
+    });
+
+    test('a default value can be used', function (assert) {
+      assert.true(scenario.captainMarvel);
+    });
+
+    test('the URL does not contain the default value', function (assert) {
+      assert.notOk(
+        window.location.search.includes('captainMarvel'),
+        'the query param should not exist'
+      );
+      assert.notOk(currentURL().includes('captainMarvel'));
+    });
+
+    module('the param becomes set', function (hooks) {
+      hooks.beforeEach(function () {
+        scenario.captainMarvel = false;
+      });
+
+      test('the URL is updated', function (assert) {
+        assert.ok(window.location.search.includes('captainMarvel=false'));
+      });
+
+      test('the default is no longer returned', function (assert) {
+        assert.false(scenario.captainMarvel);
+      });
+
+      module('the param becomes set again', function (hooks) {
+        hooks.beforeEach(function () {
+          scenario.captainMarvel = true;
+        });
+
+        test('the URL is updated', function (assert) {
+          assert.notOk(window.location.search.includes('captainMarvel=false'));
+          assert.ok(window.location.search.includes('captainMarvel=true'));
+        });
+
+        test('the default value is back', function (assert) {
+          assert.true(scenario.captainMarvel);
+        });
+      });
+
+      module('the param becomes unset', function (hooks) {
+        hooks.beforeEach(function () {
+          scenario.captainMarvel = undefined;
+        });
+
+        test('the default value is back', function (assert) {
+          assert.true(scenario.captainMarvel);
+        });
+
+        test('the URL is updated', function (assert) {
+          assert.notOk(window.location.search.includes('captainMarvel=false'));
+          assert.notOk(window.location.search.includes('captainMarvel=true'));
         });
       });
     });
