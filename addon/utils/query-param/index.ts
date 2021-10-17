@@ -39,7 +39,7 @@ function queryParamWithOptionalParams<T = boolean>(
       const value = get<any, any>(service, propertyPath);
       const deserialized = tryDeserialize(value, options);
 
-      return deserialized === undefined ? oldGet?.() || initializer?.() : deserialized;
+      return deserialized ?? oldGet?.() ?? initializer?.();
     },
     set: function (value?: T) {
       // setupController(this, 'application');

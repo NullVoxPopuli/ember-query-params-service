@@ -28,7 +28,7 @@ export function extractArgs<T>(args: Args<T>, propertyKey: string): [string, ITr
 }
 
 export function tryDeserialize<T>(value: any, options: ITransformOptions<T>) {
-  value = value === undefined ? options.defaultValue : value;
+  value = value ?? options.defaultValue;
 
   if (!options.deserialize) return value;
 
