@@ -30,7 +30,7 @@
     "postpublish": "ember ts:clean"
   },
   "resolutions": {
-    "socket.io": "4.3.1"
+    "socket.io": "4.3.2"
   },
   "dependencies": {
     "@ember-decorators/utils": "^6.1.1",
