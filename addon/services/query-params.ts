@@ -3,7 +3,6 @@ import Service, { inject as service } from '@ember/service';
 
 import * as qs from 'qs';
 
-import type Transition from '@ember/routing/-private/transition';
 import type RouterService from '@ember/routing/router-service';
 
 interface QueryParams {
@@ -28,8 +27,10 @@ export default class QueryParamsService extends Service {
 
     // TODO: drop support for Ember < 3.24 and use @ember/destroyable
     //       to not cause a memory leak in tests
-    this.router.on('routeDidChange', () => this.updateParams());
-    this.router.on('routeWillChange', (transition) => this.updateURL(transition));
+    this.router.on('routeDidChange', () => {
+      this.updateParams();
+      this.updateURL(this.router.currentRouteName);
+    });
   }
 
   get pathParts() {
@@ -61,8 +62,8 @@ export default class QueryParamsService extends Service {
    * throw them on the URL
    *
    */
-  private updateURL(transition: Transition) {
-    const path = this.router.urlFor(transition.to.name);
+  private updateURL(routeName: string) {
+    const path = this.router.urlFor(routeName);
     const { protocol, host, pathname, search, hash } = window.location;
     const queryParams = this.byPath[path];
     const existing = qs.parse(search.split('?')[1]);
