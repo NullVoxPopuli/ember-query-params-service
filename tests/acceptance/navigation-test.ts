@@ -110,6 +110,12 @@ module('Acceptance | Navigation', function (hooks) {
         assert.equal(service.current.a, '1');
         assert.equal(service.byPath['/'].a, '1');
       });
+
+      test('the question mark is not displayed if there are no query params', function (assert) {
+        assert.ok(window.location.search.includes('?'));
+        getQPService().current.a = undefined;
+        assert.notOk(window.location.search.includes('?'));
+      });
     });
   });
 
