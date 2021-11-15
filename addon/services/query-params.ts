@@ -1,5 +1,6 @@
 import { tracked } from '@glimmer/tracking';
 import Service, { inject as service } from '@ember/service';
+import { isPresent } from '@ember/utils';
 
 import * as qs from 'qs';
 
@@ -67,7 +68,7 @@ export default class QueryParamsService extends Service {
     const queryParams = this.byPath[path];
     const existing = qs.parse(search.split('?')[1]);
     const query = qs.stringify({ ...existing, ...queryParams });
-    const newUrl = `${protocol}//${host}${pathname}${hash}?${query}`;
+    const newUrl = `${protocol}//${host}${pathname}${hash}${isPresent(query) ? '?' : ''}${query}`;
 
     window.history.replaceState({ path: newUrl }, '', newUrl);
   }
@@ -101,7 +102,7 @@ const queryParamHandler = {
   set(obj: any, key: string, value: any, ...rest: any[]) {
     let { protocol, host, pathname } = window.location;
     let query = qs.stringify({ ...obj, [key]: value });
-    let newUrl = `${protocol}//${host}${pathname}?${query}`;
+    let newUrl = `${protocol}//${host}${pathname}${isPresent(query) ? '?' : ''}${query}`;
 
     window.history.pushState({ path: newUrl }, '', newUrl);
 
