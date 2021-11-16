@@ -233,5 +233,32 @@ module('Acceptance | Navigation', function (hooks) {
     });
   });
 
+  module('query param is reflected in the URL sorted', function (hooks) {
+    let service: QueryParamsService;
+
+    hooks.beforeEach(function () {
+      service = getQPService();
+    });
+
+    test('setting params', function (assert) {
+      service.current.delta = '4';
+      service.current.beta = '2';
+
+      let indexDelta = window.location.search.indexOf('delta');
+      let indexBeta = window.location.search.indexOf('beta');
+
+      assert.ok(indexBeta < indexDelta, 'params are sorted');
+    });
+
+    test('visiting a route', async function (assert) {
+      await visit('/bar?b=4&a=2');
+
+      let indexB = window.location.search.indexOf('b');
+      let indexA = window.location.search.indexOf('a');
+
+      assert.ok(indexA < indexB, 'params are sorted');
+    });
+  });
+
   module('locationType is the default and there is a hash in the URL', function () {});
 });

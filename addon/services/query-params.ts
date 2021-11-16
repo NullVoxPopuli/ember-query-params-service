@@ -68,7 +68,7 @@ export default class QueryParamsService extends Service {
     const { protocol, host, pathname, search, hash } = window.location;
     const queryParams = this.byPath[path];
     const existing = qs.parse(search.split('?')[1]);
-    const query = qs.stringify({ ...existing, ...queryParams });
+    const query = qs.stringify(sortKeys({ ...existing, ...queryParams }));
     const newUrl = `${protocol}//${host}${pathname}${hash}${isPresent(query) ? '?' : ''}${query}`;
 
     window.history.replaceState({ path: newUrl }, '', newUrl);
@@ -96,13 +96,23 @@ export default class QueryParamsService extends Service {
   }
 }
 
+function sortKeys(unordered: Record<string, unknown>): Record<string, unknown> {
+  return Object.keys(unordered)
+    .sort()
+    .reduce((obj, key) => {
+      obj[key] = unordered[key];
+
+      return obj;
+    }, {});
+}
+
 const queryParamHandler = {
   get(obj: any, key: string, ...rest: any[]) {
     return Reflect.get(obj, key, ...rest);
   },
   set(obj: any, key: string, value: any, ...rest: any[]) {
     let { protocol, host, pathname } = window.location;
-    let query = qs.stringify({ ...obj, [key]: value });
+    let query = qs.stringify(sortKeys({ ...obj, [key]: value }));
     let newUrl = `${protocol}//${host}${pathname}${isPresent(query) ? '?' : ''}${query}`;
 
     window.history.pushState({ path: newUrl }, '', newUrl);
