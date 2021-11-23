@@ -1641,10 +1641,10 @@
     node-gyp "^7.1.0"
     read-package-json-fast "^2.0.1"
 
-"@nullvoxpopuli/eslint-configs@^2.1.5":
-  version "2.1.5"
-  resolved "https://registry.yarnpkg.com/@nullvoxpopuli/eslint-configs/-/eslint-configs-2.1.5.tgz#ef177b44f2b538558254de9687db13274e5ed31b"
-  integrity sha512-nJbVyXL6nF/R1EQjEytscHJNqobLTMUw3MIkeuzzfAxnNkR4qi7qsuvHtIOJM7wO7CvAEGtadVfOe0kaNJrI0A==
+"@nullvoxpopuli/eslint-configs@^2.1.6":
+  version "2.1.6"
+  resolved "https://registry.yarnpkg.com/@nullvoxpopuli/eslint-configs/-/eslint-configs-2.1.6.tgz#e817d0f4e0a27a8f643ec8c733429b433c884d45"
+  integrity sha512-7qhN7aX/rGCTi0cqp4ck4ToqDzs/Fi+mF2fDif4yp+hcL0XUPyki2ebS3UPUn6PT/wfGI4R7r4RxYHZW1sCvtA==
   dependencies:
     "@typescript-eslint/eslint-plugin" "5.4.0"
     "@typescript-eslint/parser" "5.4.0"
@@ -1652,7 +1652,7 @@
     eslint "7.32.0"
     eslint-config-prettier "8.3.0"
     eslint-plugin-decorator-position "4.0.1"
-    eslint-plugin-ember "10.5.7"
+    eslint-plugin-ember "10.5.8"
     eslint-plugin-import "^2.25.3"
     eslint-plugin-json "^3.1.0"
     eslint-plugin-node "11.1.0"
@@ -6134,7 +6134,21 @@ eslint-plugin-decorator-position@4.0.1:
     ember-rfc176-data "^0.3.12"
     snake-case "^3.0.3"
 
-eslint-plugin-ember@10.5.7, eslint-plugin-ember@^10.5.7:
+eslint-plugin-ember@10.5.8:
+  version "10.5.8"
+  resolved "https://registry.yarnpkg.com/eslint-plugin-ember/-/eslint-plugin-ember-10.5.8.tgz#87e004a5ebed88f94008364554daf57df2c9c718"
+  integrity sha512-d21mJ+F+htgi6HhrjwbOfllJojF4ZWGruW13HkBoGS2SaHqKUyvIH/8j3EjSxlsGFiNfhTEUWkNaUSLJxgbtWg==
+  dependencies:
+    "@ember-data/rfc395-data" "^0.0.4"
+    css-tree "^1.0.0-alpha.39"
+    ember-rfc176-data "^0.3.15"
+    eslint-utils "^3.0.0"
+    estraverse "^5.2.0"
+    lodash.kebabcase "^4.1.1"
+    requireindex "^1.2.0"
+    snake-case "^3.0.3"
+
+eslint-plugin-ember@^10.5.7:
   version "10.5.7"
   resolved "https://registry.yarnpkg.com/eslint-plugin-ember/-/eslint-plugin-ember-10.5.7.tgz#132dcd139fc9e830b707910d1ee4a458b83ab9d4"
   integrity sha512-PTnZxbexrvRgEUtiuTaRjcFIIezzNsaJLUkvOoKhmxXTZnWgSPV36PGv5ml0BOallWYAOocefjTgv9SWvlmEdw==
