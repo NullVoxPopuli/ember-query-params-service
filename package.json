@@ -55,7 +55,7 @@
     "@types/ember-qunit": "^3.4.15",
     "@types/ember-test-helpers": "^1.0.10",
     "@types/ember-testing-helpers": "^0.0.4",
-    "@types/ember__test-helpers": "^2.0.2",
+    "@types/ember__test-helpers": "^2.6.0",
     "@types/qs": "^6.9.7",
     "@types/qunit": "^2.11.2",
     "@types/rsvp": "^4.0.4",
