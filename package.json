@@ -46,7 +46,7 @@
     "@commitlint/config-conventional": "^13.2.0",
     "@ember/optional-features": "^2.0.0",
     "@ember/test-helpers": "^2.6.0",
-    "@embroider/test-setup": "^0.50.1",
+    "@embroider/test-setup": "^0.50.2",
     "@glimmer/component": "^1.0.4",
     "@nullvoxpopuli/eslint-configs": "^2.1.17",
     "@semantic-release/changelog": "^6.0.1",
