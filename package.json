@@ -38,7 +38,7 @@
     "ember-auto-import": "^1.11.3",
     "ember-cli-babel": "^7.26.11",
     "ember-cli-htmlbars": "^6.0.1",
-    "ember-cli-typescript": "^4.2.1",
+    "ember-cli-typescript": "^5.0.0",
     "qs": "^6.10.3"
   },
   "devDependencies": {
