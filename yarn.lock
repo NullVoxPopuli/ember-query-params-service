@@ -2567,10 +2567,10 @@
     node-gyp "^8.2.0"
     read-package-json-fast "^2.0.1"
 
-"@nullvoxpopuli/eslint-configs@^2.1.18":
-  version "2.1.18"
-  resolved "https://registry.yarnpkg.com/@nullvoxpopuli/eslint-configs/-/eslint-configs-2.1.18.tgz#1f5746e539b6fc8fa1e9d6cac07d2bec4d22c4f0"
-  integrity sha512-1mz6hTBrJgRy+c8OZw3hM6g882Zsbde8/DGH54EZso2Q/PNYwNH2O428cQhB6FS8bUOzGQ+v1IeA4NnPjvEvxA==
+"@nullvoxpopuli/eslint-configs@^2.1.19":
+  version "2.1.19"
+  resolved "https://registry.yarnpkg.com/@nullvoxpopuli/eslint-configs/-/eslint-configs-2.1.19.tgz#77a5bdb0a9daa9567c67750cd301b6c530d5b7d3"
+  integrity sha512-55gJCYT9z2a2m3qxPty2aiZl3O9nYfrfWovrlFBb+xALamq0/lU9KOm5f9fye6BlCtQoiOcB9ppvCqD8Wxi8dA==
   dependencies:
     "@typescript-eslint/eslint-plugin" "5.10.0"
     "@typescript-eslint/parser" "5.10.0"
