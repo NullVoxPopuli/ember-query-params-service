@@ -92,7 +92,7 @@
     "qunit": "^2.17.2",
     "qunit-dom": "^2.0.0",
     "semantic-release": "^19.0.2",
-    "typescript": "4.5.5"
+    "typescript": "4.8.4"
   },
   "engines": {
     "node": "14.* || >= 16"
