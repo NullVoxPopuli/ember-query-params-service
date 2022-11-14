@@ -48,7 +48,7 @@
     "@ember/test-helpers": "^2.6.0",
     "@embroider/test-setup": "^1.0.0",
     "@glimmer/component": "^1.1.2",
-    "@nullvoxpopuli/eslint-configs": "^2.3.3",
+    "@nullvoxpopuli/eslint-configs": "^2.3.5",
     "@semantic-release/changelog": "^6.0.1",
     "@semantic-release/git": "^10.0.1",
     "@types/ember": "^4.0.0",
