@@ -45,7 +45,7 @@
     "@commitlint/cli": "^17.0.3",
     "@commitlint/config-conventional": "^17.0.3",
     "@ember/optional-features": "^2.0.0",
-    "@ember/test-helpers": "^2.6.0",
+    "@ember/test-helpers": "^2.9.4",
     "@embroider/test-setup": "^1.0.0",
     "@glimmer/component": "^1.1.2",
     "@nullvoxpopuli/eslint-configs": "^2.3.5",
