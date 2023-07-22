@@ -38,7 +38,7 @@ jobs:
     name: Floating Deps Test
     timeout-minutes: 5
     runs-on: ubuntu-latest
-    needs: [install_dependencies]
+    needs: [default_tests]
     steps:
       - uses: wyvox/action@v1
         with:
@@ -48,6 +48,7 @@ jobs:
   try-scenarios:
     name: Compatibility
     runs-on: ubuntu-latest
+    needs: [default_tests]
     strategy:
       fail-fast: false
       matrix:
