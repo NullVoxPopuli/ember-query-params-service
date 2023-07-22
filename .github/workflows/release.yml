@@ -1,4 +1,4 @@
-# https://github.com/changesets/action
+  # https://github.com/changesets/action
 name: Release
 
 on:
