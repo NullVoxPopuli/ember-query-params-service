@@ -52,7 +52,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        scenario:
+        try-scenario:
         - "ember-3.13"
         - "ember-3.14"
         - "ember-3.16"
@@ -60,6 +60,9 @@ jobs:
         - "ember-3.20"
         - "ember-3.24"
         - "ember-3.28"
+        - "ember-4.4"
+        - "ember-4.8"
+        - "ember-4.12"
         - "ember-release"
         - "ember-beta"
         - "ember-canary"

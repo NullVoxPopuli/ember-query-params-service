@@ -45,6 +45,18 @@ module.exports = function () {
           npm: { devDependencies: { 'ember-source': '~3.28' } },
         },
         {
+          name: 'ember-4.4',
+          npm: { devDependencies: { 'ember-source': '~4.4' } },
+        },
+        {
+          name: 'ember-4.8',
+          npm: { devDependencies: { 'ember-source': '~4.8' } },
+        },
+        {
+          name: 'ember-4.12',
+          npm: { devDependencies: { 'ember-source': '~4.12' } },
+        },
+        {
           name: 'ember-release',
           npm: {
             devDependencies: { 'ember-source': urls[0], webpack: '^5.58.2' },
