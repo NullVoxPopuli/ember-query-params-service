@@ -149,7 +149,8 @@ module('Unit | Utility | @queryParam', function (hooks) {
 
   module('a different name can be used on the url', function (hooks) {
     class Scenario {
-      @queryParam('strongest-avenger') strongestAvenger: string | undefined = 'Captain Marvel';
+      @queryParam('strongest-avenger') strongestAvenger: string | undefined =
+        'Captain Marvel';
     }
 
     let scenario: Scenario;
@@ -186,18 +187,29 @@ module('Unit | Utility | @queryParam', function (hooks) {
     });
 
     test('gets the default value from the options', function (assert) {
-      assert.equal(scenario.strongestAvenger, 'Thor', 'default value from options');
+      assert.equal(
+        scenario.strongestAvenger,
+        'Thor',
+        'default value from options'
+      );
     });
 
     test('the URL does not contain the param when it is the default', function (assert) {
       scenario.strongestAvenger = 'Captain Marvel';
-      assert.ok(window.location.search.includes('strongest-avenger'), 'the param is present');
+      assert.ok(
+        window.location.search.includes('strongest-avenger'),
+        'the param is present'
+      );
       scenario.strongestAvenger = 'Thor';
       assert.notOk(
         window.location.search.includes('strongest-avenger=Thor'),
         'the param is not present'
       );
-      assert.equal(scenario.strongestAvenger, 'Thor', 'the param still has correct value');
+      assert.equal(
+        scenario.strongestAvenger,
+        'Thor',
+        'the param still has correct value'
+      );
     });
   });
 
@@ -221,9 +233,15 @@ module('Unit | Utility | @queryParam', function (hooks) {
 
       test('the URL does not contain the param when it is the default', function (assert) {
         scenario.active = true;
-        assert.ok(window.location.search.includes('active'), 'the param is present');
+        assert.ok(
+          window.location.search.includes('active'),
+          'the param is present'
+        );
         scenario.active = false;
-        assert.notOk(window.location.search.includes('active'), 'the param is not present');
+        assert.notOk(
+          window.location.search.includes('active'),
+          'the param is not present'
+        );
         assert.false(scenario.active, 'the param still has correct value');
       });
     });
@@ -247,9 +265,15 @@ module('Unit | Utility | @queryParam', function (hooks) {
 
       test('the URL does not contain the param when it is the default', function (assert) {
         scenario.active = false;
-        assert.ok(window.location.search.includes('active'), 'the param is present');
+        assert.ok(
+          window.location.search.includes('active'),
+          'the param is present'
+        );
         scenario.active = true;
-        assert.notOk(window.location.search.includes('active'), 'the param is not present');
+        assert.notOk(
+          window.location.search.includes('active'),
+          'the param is not present'
+        );
         assert.true(scenario.active, 'the param still has correct value');
       });
     });
@@ -274,9 +298,15 @@ module('Unit | Utility | @queryParam', function (hooks) {
 
       test('the URL does not contain the param when it is the default', function (assert) {
         scenario.page = 1;
-        assert.ok(window.location.search.includes('page'), 'the param is present');
+        assert.ok(
+          window.location.search.includes('page'),
+          'the param is present'
+        );
         scenario.page = 0;
-        assert.notOk(window.location.search.includes('page'), 'the param is not present');
+        assert.notOk(
+          window.location.search.includes('page'),
+          'the param is not present'
+        );
         assert.equal(scenario.page, 0, 'the param still has correct value');
       });
     });
@@ -299,9 +329,15 @@ module('Unit | Utility | @queryParam', function (hooks) {
 
       test('the URL does not contain the param when it is the default', function (assert) {
         scenario.page = 0;
-        assert.ok(window.location.search.includes('page'), 'the param is present');
+        assert.ok(
+          window.location.search.includes('page'),
+          'the param is present'
+        );
         scenario.page = 1;
-        assert.notOk(window.location.search.includes('page'), 'the param is not present');
+        assert.notOk(
+          window.location.search.includes('page'),
+          'the param is not present'
+        );
         assert.equal(scenario.page, 1, 'the param still has correct value');
       });
     });

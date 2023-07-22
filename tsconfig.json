@@ -1,49 +1,15 @@
 {
+  "extends": "@tsconfig/ember/tsconfig.json",
   "compilerOptions": {
-    "target": "es2020",
-    "allowJs": true,
-    "moduleResolution": "node",
-    "skipLibCheck": true,
-    "allowSyntheticDefaultImports": true,
-    "noImplicitAny": false,
-    "noImplicitThis": true,
-    "alwaysStrict": true,
-    "strictNullChecks": true,
-    "strictPropertyInitialization": true,
-    "noFallthroughCasesInSwitch": true,
-    "noUnusedLocals": true,
-    "experimentalDecorators": true,
-    "noUnusedParameters": true,
-    "noImplicitReturns": true,
-    "noEmitOnError": false,
-    "noEmit": true,
-    "inlineSourceMap": true,
-    "inlineSources": true,
     "baseUrl": ".",
-    "module": "es6",
     "paths": {
-      "dummy/tests/*": [
-        "tests/*"
-      ],
-      "dummy/*": [
-        "tests/dummy/app/*",
-        "app/*"
-      ],
-      "ember-query-params-service": [
-        "addon"
-      ],
-      "ember-query-params-service/*": [
-        "addon/*"
-      ],
-      "ember-query-params-service/test-support": [
-        "addon-test-support"
-      ],
-      "ember-query-params-service/test-support/*": [
-        "addon-test-support/*"
-      ],
-      "*": [
-        "types/*"
-      ]
+      "dummy/tests/*": ["tests/*"],
+      "dummy/*": ["tests/dummy/app/*", "app/*"],
+      "ember-query-params-service": ["addon"],
+      "ember-query-params-service/*": ["addon/*"],
+      "ember-query-params-service/test-support": ["addon-test-support"],
+      "ember-query-params-service/test-support/*": ["addon-test-support/*"],
+      "*": ["types/*"]
     }
   },
   "include": [
