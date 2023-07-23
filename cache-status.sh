@@ -12,5 +12,5 @@ pnpm turbo run lint:types test _:lint --dry-run=json \
         .[$package][$task] |= $cache
       )
       ' \
-| jq -c
+| jq -r
 
