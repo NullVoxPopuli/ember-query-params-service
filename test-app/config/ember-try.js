@@ -12,31 +12,73 @@ module.exports = async function () {
     scenarios: [
       {
         name: 'ember-3.13',
-        npm: { devDependencies: { 'ember-source': '~3.13', 'ember-cli': '^4.0.0' } },
+        npm: {
+          devDependencies: {
+            'ember-source': '~3.13',
+            'ember-cli': '^4.0.0',
+            'ember-qunit': '^5.0.0',
+          },
+        },
       },
       {
         name: 'ember-3.14',
-        npm: { devDependencies: { 'ember-source': '~3.14', 'ember-cli': '^4.0.0' } },
+        npm: {
+          devDependencies: {
+            'ember-source': '~3.14',
+            'ember-cli': '^4.0.0',
+            'ember-qunit': '^5.0.0',
+          },
+        },
       },
       {
         name: 'ember-3.16',
-        npm: { devDependencies: { 'ember-source': '~3.16', 'ember-cli': '^4.0.0' } },
+        npm: {
+          devDependencies: {
+            'ember-source': '~3.16',
+            'ember-cli': '^4.0.0',
+            'ember-qunit': '^5.0.0',
+          },
+        },
       },
       {
         name: 'ember-3.18',
-        npm: { devDependencies: { 'ember-source': '~3.18', 'ember-cli': '^4.0.0' } },
+        npm: {
+          devDependencies: {
+            'ember-source': '~3.18',
+            'ember-cli': '^4.0.0',
+            'ember-qunit': '^5.0.0',
+          },
+        },
       },
       {
         name: 'ember-3.20',
-        npm: { devDependencies: { 'ember-source': '~3.20', 'ember-cli': '^4.0.0' } },
+        npm: {
+          devDependencies: {
+            'ember-source': '~3.20',
+            'ember-cli': '^4.0.0',
+            'ember-qunit': '^5.0.0',
+          },
+        },
       },
       {
         name: 'ember-3.24',
-        npm: { devDependencies: { 'ember-source': '~3.24', 'ember-cli': '^4.0.0' } },
+        npm: {
+          devDependencies: {
+            'ember-source': '~3.24',
+            'ember-cli': '^4.0.0',
+            'ember-qunit': '^5.0.0',
+          },
+        },
       },
       {
         name: 'ember-3.28',
-        npm: { devDependencies: { 'ember-source': '~3.28', 'ember-cli': '^4.0.0' } },
+        npm: {
+          devDependencies: {
+            'ember-source': '~3.28',
+            'ember-cli': '^4.0.0',
+            'ember-qunit': '^5.0.0',
+          },
+        },
       },
       {
         name: 'ember-4.4',
