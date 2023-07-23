@@ -9,7 +9,7 @@ overrides:
   ember-async-data: ^1.0.1
   ember-cli-babel: ^7.26.11
 
-packageExtensionsChecksum: 89f1ddeb468cf96fa5eae56caf0dc39e
+packageExtensionsChecksum: 7d456f94fcb212f3b99ec0fb4a0269f9
 
 importers:
 
@@ -10173,6 +10173,7 @@ packages:
   /iconv-lite@0.6.3:
     resolution: {integrity: sha512-4fCk79wshMdzMp2rH06qWrJE4iolqLhCUH+OiuIgU++RB0+94NlDL81atO7GX55uUKueo0txHNtvEyI6D7WdMw==}
     engines: {node: '>=0.10.0'}
+    requiresBuild: true
     dependencies:
       safer-buffer: 2.1.2
     dev: false
@@ -15932,7 +15933,6 @@ packages:
     resolution: {directory: ember-query-params-service, type: directory}
     id: file:ember-query-params-service
     name: ember-query-params-service
-    version: 0.4.0
     peerDependencies:
       '@glimmer/tracking': '>= 1.0.0'
       ember-source: '*'
