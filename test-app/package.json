@@ -26,7 +26,13 @@
     "_syncPnpm": "pnpm sync-dependencies-meta-injected"
   },
   "dependencies": {
+    "ember-query-params-service": "workspace:*",
     "qunit-assertions-extra": "^1.0.3"
+  },
+  "dependenciesMeta": {
+    "ember-query-params-service": {
+      "injected": true
+    }
   },
   "devDependencies": {
     "@babel/core": "^7.22.9",
@@ -65,7 +71,6 @@
     "ember-load-initializers": "^2.1.2",
     "ember-modifier": "^4.1.0",
     "ember-page-title": "^7.0.0",
-    "ember-query-params-service": "workspace:*",
     "ember-qunit": "^7.0.0",
     "ember-resolver": "^10.1.1",
     "ember-source": "~5.1.2",
@@ -85,9 +90,6 @@
     "prettier-plugin-ember-template-tag": "^0.3.2",
     "qunit": "^2.19.4",
     "qunit-dom": "^2.0.0",
-    "stylelint": "^15.9.0",
-    "stylelint-config-standard": "^33.0.0",
-    "stylelint-prettier": "^3.0.0",
     "tracked-built-ins": "^3.1.1",
     "typescript": "^5.1.6",
     "webpack": "^5.88.2"
