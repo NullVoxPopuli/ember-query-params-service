@@ -108,6 +108,7 @@ module.exports = async function () {
             'ember-cli': '^4.0.0',
             'ember-qunit': '^5.0.0',
             '@ember/test-helpers': '^2.1.0',
+            'ember-cli-htmlbars': '^5.0.0',
             '@embroider/core': null,
             '@embroider/compat': null,
             '@embroider/webpack': null,
