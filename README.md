@@ -9,8 +9,10 @@ ember-query-params-service
 Compatibility
 ------------------------------------------------------------------------------
 
-* Ember.js v3.11 or above
-* Ember CLI v3.11 or above
+* Ember.js v3.13 or above
+* Ember CLI v3.13 or above
+
+Embroider support is available at ember 4.4 and higher
 
 
 Installation
