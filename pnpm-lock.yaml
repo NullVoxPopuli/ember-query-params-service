@@ -237,6 +237,9 @@ importers:
       '@embroider/core':
         specifier: 3.2.0
         version: 3.2.0(@glint/template@1.0.2)
+      '@embroider/test-setup':
+        specifier: ^3.0.1
+        version: 3.0.1(@embroider/compat@3.2.0)(@embroider/core@3.2.0)(@embroider/webpack@3.1.4)
       '@embroider/webpack':
         specifier: 3.1.4
         version: 3.1.4(@embroider/core@3.2.0)(webpack@5.88.2)
@@ -3627,6 +3630,28 @@ packages:
       typescript-memoize: 1.1.1
     transitivePeerDependencies:
       - supports-color
+
+  /@embroider/test-setup@3.0.1(@embroider/compat@3.2.0)(@embroider/core@3.2.0)(@embroider/webpack@3.1.4):
+    resolution: {integrity: sha512-t7R2f10iZDSNw3ovWAPM63GRQTu63uihpVh6CvHev5XkLt8B7tdxcxGyO6RbdF5Hu+pbsUu8sD0kAlR1gopmxg==}
+    engines: {node: 12.* || 14.* || >= 16}
+    peerDependencies:
+      '@embroider/compat': ^3.0.0
+      '@embroider/core': ^3.0.0
+      '@embroider/webpack': ^3.0.0
+    peerDependenciesMeta:
+      '@embroider/compat':
+        optional: true
+      '@embroider/core':
+        optional: true
+      '@embroider/webpack':
+        optional: true
+    dependencies:
+      '@embroider/compat': 3.2.0(@embroider/core@3.2.0)(@glint/template@1.0.2)
+      '@embroider/core': 3.2.0(@glint/template@1.0.2)
+      '@embroider/webpack': 3.1.4(@embroider/core@3.2.0)(webpack@5.88.2)
+      lodash: 4.17.21
+      resolve: 1.22.2
+    dev: true
 
   /@embroider/webpack@3.1.4(@embroider/core@3.2.0)(webpack@5.88.2):
     resolution: {integrity: sha512-i56CNcIzYnlLpT3y2Q/Apmq2YkUQm9RGTEFixor1oFE2x1f+cVNt7yvBj01dN4cYbRnAkfE1y/1RXt907GMYkQ==}
@@ -17493,7 +17518,6 @@ packages:
     resolution: {directory: ember-query-params-service, type: directory}
     id: file:ember-query-params-service
     name: ember-query-params-service
-    version: 0.4.0
     peerDependencies:
       '@glimmer/tracking': '>= 1.0.0'
       ember-source: '*'

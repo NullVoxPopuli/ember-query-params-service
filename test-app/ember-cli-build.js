@@ -12,9 +12,9 @@ module.exports = function (defaults) {
     },
   });
 
-  const { Webpack } = require('@embroider/webpack');
+  const { maybeEmbroider } = require('@embroider/test-setup');
 
-  return require('@embroider/compat').compatBuild(app, Webpack, {
+  return maybeEmbroider(app, {
     extraPublicTrees: [],
     staticAddonTrees: true,
     staticAddonTestSupportTrees: true,
