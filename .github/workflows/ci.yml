@@ -41,7 +41,7 @@ jobs:
         run: echo "${{ needs.setup.outputs.pending }}"
         continue-on-error: true
       - name: json
-        run: echo "${{ needs.setup.outputs.pending }}" | jq -C
+        run: echo '${{ needs.setup.outputs.pending }}' | jq -C
         continue-on-error: true
       - name: test condition
         run: echo '${{ fromJSON(needs.setup.outputs.pending).test-app.test.status }}'
