@@ -1,0 +1,129 @@
+/////////////////////////////////////////////////////
+/////////////////////////////////////////////////////
+//
+//  NOTE on convention:
+//    script names starting with "_:" do so because
+//    they are not intended to be invoked by humans
+//    turborepo will invoke these scripts, freeing
+//    up the more human-readable script names for
+//    running by humans.
+//
+//    This helps reduce the possibility of accidental
+//    cycles in script dependencies and invocation.
+//
+//    One way to think about this is to ask a question:
+//
+//        Is the script and endpoint command?
+//          as in, it's not a meta-script or script-running script?
+//
+//        If the script is an endpoint command,
+//          the _: prefix is not needed.
+//
+//        Otherwise, the _: is needed, because the local /
+//        package-specific script would be in conflict.
+//        (We want to avoid having turbo call scripts that call turbo)
+//
+/////////////////////////////////////////////////////
+/////////////////////////////////////////////////////
+{
+  "baseBranch": "origin/main",
+  "pipeline": {
+    /////////////////////////////////////////////////
+    /////////////////////////////////////////////////
+    //
+    //         Local Dev
+    //
+    /////////////////////////////////////////////////
+    /////////////////////////////////////////////////
+    "dev": {
+      "dependsOn": ["^dev"],
+      "cache": false
+    },
+    "start": {
+      "dependsOn": ["_syncPnpm", "^build"],
+      "outputs": [],
+      "cache": false,
+      "persistent": true
+    },
+
+    /////////////////////////////////////////////////
+    /////////////////////////////////////////////////
+    //
+    //         C.I. / C.D.
+    //
+    /////////////////////////////////////////////////
+    /////////////////////////////////////////////////
+    // development
+    "build:dev": {
+      "outputs": ["dist/**"],
+      "dependsOn": ["_syncPnpm"]
+    },
+    "pack": {
+      "outputs": ["*.tgz"],
+      "dependsOn": ["build"]
+    },
+    // production
+    "build": {
+      "outputs": ["dist/**", "dist-types/**"],
+      "dependsOn": ["_syncPnpm"]
+    },
+    "_syncPnpm": {
+      "dependsOn": ["^build"],
+      "cache": false
+    },
+    "test": {
+      "outputs": [],
+      "dependsOn": ["_syncPnpm", "^build"]
+    },
+    // Apps will have test:ember and test:browserstack
+    // They are separate so that they can cache independently
+    // and provide more variability than just "test"
+    "test:ember": {
+      "env": [
+        "CI_BROWSER",
+        "EMBER_TRY_CURRENT_SCENARIO",
+        "EMBROIDER_TEST_SETUP_OPTIONS"
+      ],
+      "dependsOn": ["^build"]
+    },
+    // All scenarios
+    "test:scenarios": {
+      "dependsOn": ["^build"]
+    },
+
+    /////////////////////////////////////////////////
+    /////////////////////////////////////////////////
+    //
+    //         Quality Checks
+    //
+    /////////////////////////////////////////////////
+    /////////////////////////////////////////////////
+    "_:lint": {
+      "outputs": [],
+      "dependsOn": [
+        "lint:js",
+        "lint:hbs",
+        "lint:prettier",
+        "lint:types",
+        "lint:package",
+        "lint:published-types"
+      ]
+    },
+    "lint:js": { "outputs": [] },
+    "lint:hbs": { "outputs": [] },
+    "lint:prettier": { "outputs": [] },
+    "lint:types": { "outputs": [], "dependsOn": ["_syncPnpm"] },
+    "lint:package": { "outputs": [], "dependsOn": ["build"] },
+    "lint:published-types": { "outputs": [], "dependsOn": ["pack"] },
+
+    "_:lint:fix": {
+      "cache": false,
+      "dependsOn": ["lint:js:fix", "lint:prettier:fix", "lint:hbs:fix"]
+    },
+    // Prettier can alter files too, so let's prevent race conditions for multiple
+    // writing to the same files.
+    "lint:js:fix": { "cache": false },
+    "lint:hbs:fix": { "cache": false, "dependsOn": ["lint:prettier:fix"] },
+    "lint:prettier:fix": { "cache": false, "dependsOn": ["lint:js:fix"] }
+  }
+}

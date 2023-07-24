@@ -1,0 +1,6 @@
+packages:
+  - 'ember-query-params-service'
+  - 'test-app'
+  - 'docs-app'
+  - 'docs-api'
+  - 'dev'

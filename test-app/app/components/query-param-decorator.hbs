@@ -1,0 +1,26 @@
+<div data-test-qp-foo>
+  <span>{{this.foo}}</span>
+  |
+  <button type="button" {{on "click" this.addToFoo}}>
+    Add to Foo
+  </button>
+  <button type="button" {{on "click" this.fooToZero}}>make 0</button>
+  <button type="button" {{on "click" this.clearFoo}}>Clear</button>
+</div>
+
+<div data-test-qp-bar>
+  <span>{{this.bar}}</span>
+  |
+  <button type="button" {{on "click" this.addToBar}}>
+    Add to Bar
+  </button>
+  <button type="button" {{on "click" this.barToZero}}>make 0</button>
+  <button type="button" {{on "click" this.clearBar}}>Clear</button>
+</div>
+
+<div data-test-strongest-avenger>
+  <span>Strongest Avenger: {{this.strongestAvenger}}</span>
+  |
+  <button type="button" data-test-set {{on "click" this.thorWalksIn}}>Thor walks in...</button>
+  <button type="button" data-test-unset {{on "click" this.clearStrongestAvenger}}>Kick Thor out</button>
+</div>
