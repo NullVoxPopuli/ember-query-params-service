@@ -1,6 +1,6 @@
 {
   "name": "ember-query-params-service",
-  "version": "0.4.0",
+  "version": "1.0.0",
   "description": "Prototype Service for managing query params via a service",
   "keywords": [
     "ember-addon"
