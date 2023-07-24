@@ -41,13 +41,13 @@ jobs:
         run: echo "${{ needs.setup.outputs.pending }}"
         continue-on-error: true
       - name: json
-        run: echo "${{ needs.setup.outputs.pending }}" | jq
+        run: echo "${{ needs.setup.outputs.pending }}" | jq -C
         continue-on-error: true
       - name: test condition
         run: echo '${{ fromJSON(needs.setup.outputs.pending).test-app.test.status }}'
         continue-on-error: true
       - name: types condition
-        run: jq ${{ fromJSON(needs.setup.outputs.pending).test-app['lint:types'].status }}
+        run: echo "${{ fromJSON(needs.setup.outputs.pending).test-app['lint:types'].status }}"
         continue-on-error: true
 
 
