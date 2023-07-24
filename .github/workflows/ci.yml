@@ -31,6 +31,22 @@ jobs:
       - id: set-pending
         run: echo "pending=$(./cache-status.sh)" >> $GITHUB_OUTPUT
 
+  debug:
+    name: Debug
+    runs-on: ubuntu-latest
+    needs: [setup]
+    timeout-minutes: 5
+    steps:
+      - uses: wyvox/action@v1
+        with:
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
+      - run: echo "$( ${{ needs.setup.outputs.pending }} )"
+        name: raw json
+      - run: echo "$( ${{ needs.setup.outputs.pending }} )" | jq
+        name: json
+
+
+
   # Every PR will need linting. Turbo's cache can optimize per-package
   lint:
     name: Lint
