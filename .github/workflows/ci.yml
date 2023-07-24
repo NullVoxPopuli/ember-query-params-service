@@ -39,12 +39,16 @@ jobs:
     steps:
       - name: raw json
         run: echo "${{ needs.setup.outputs.pending }}"
+        continue-on-error: true
       - name: json
         run: echo "${{ needs.setup.outputs.pending }}" | jq
+        continue-on-error: true
       - name: test condition
         run: echo '${{ fromJSON(needs.setup.outputs.pending).test-app.test.status }}'
+        continue-on-error: true
       - name: types condition
         run: jq ${{ fromJSON(needs.setup.outputs.pending).test-app['lint:types'].status }}
+        continue-on-error: true
 
 
   # Every PR will need linting. Turbo's cache can optimize per-package
