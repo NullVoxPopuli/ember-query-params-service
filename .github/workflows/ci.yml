@@ -37,14 +37,14 @@ jobs:
     needs: [setup]
     timeout-minutes: 5
     steps:
-      - uses: wyvox/action@v1
-        with:
-          repo-token: ${{ secrets.GITHUB_TOKEN }}
-      - run: echo "$( ${{ needs.setup.outputs.pending }} )"
-        name: raw json
-      - run: echo "$( ${{ needs.setup.outputs.pending }} )" | jq
-        name: json
-
+      - name: raw json
+        run: echo "${{ needs.setup.outputs.pending }}"
+      - name: json
+        run: echo "${{ needs.setup.outputs.pending }}" | jq
+      - name: conditions
+        run: |
+          echo "${{ fromJSON(needs.setup.outputs.pending).test-app.test.status }}"
+          echo "${{ fromJSON(needs.setup.outputs.pending).test-app['lint:types'].status }}"
 
 
   # Every PR will need linting. Turbo's cache can optimize per-package
