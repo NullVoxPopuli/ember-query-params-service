@@ -38,7 +38,7 @@
   "dependencies": {
     "@babel/runtime": "^7.22.6",
     "@embroider/addon-shim": "^1.8.6",
-    "@embroider/macros": "1.13.0",
+    "@embroider/macros": "1.13.4",
     "qs": "^6.10.3"
   },
   "devDependencies": {
