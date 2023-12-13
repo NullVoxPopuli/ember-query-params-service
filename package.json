@@ -19,8 +19,8 @@
     "@changesets/cli": "^2.26.2",
     "@nullvoxpopuli/dev": "workspace:*",
     "concurrently": "^8.2.0",
-    "prettier": "^2.8.8",
-    "prettier-plugin-ember-template-tag": "^0.3.2",
+    "prettier": "^3.0.0",
+    "prettier-plugin-ember-template-tag": "^1.0.0",
     "turbo": "^1.10.9"
   },
   "engines": {
