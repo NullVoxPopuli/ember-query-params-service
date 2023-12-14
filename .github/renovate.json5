@@ -1,48 +1,5 @@
 {
-  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": [
-    "config:base"
-  ],
-  "automerge": true,
-  "masterIssue": true,
-  "schedule": ["after 11pm on sunday"],
-  "packageRules": [
-    ////////////////////////////////////////
-    // Grouping namespaced packages together
-    //
-    // This reduces overall PR count
-    ////////////////////////////////////////
-    {
-      "groupName": "Type Definitions",
-      "packagePatterns": ["^@types\/*"],
-      "schedule": ["after 9pm on sunday"]
-    },
-    {
-      "groupName": "Lint Dependencies",
-      "schedule": ["after 9pm on sunday"],
-      "packageNames": [
-        "eslint",
-        "babel-eslint",
-        "ember-template-lint",
-        "prettier"
-      ],
-      "packagePatterns": [
-        "eslint.*",
-        ".*eslint.*",
-        "prettier.*",
-        "stylelint.*"
-      ],
-    },
-    {
-      // changing peerDependencies *at all* is a breaking change
-      "matchDepTypes": ["peerDependencies"],
-      "enabled": false
-    },
-    {
-      // ensure maximum compatibility, when possible
-      "matchPaths": ["ember-primitives/package.json"],
-      "matchDepTypes": ["dependencies"],
-      "enabled": false
-    },
+    "github>NullVoxPopuli/renovate:npm.json5"
   ]
 }
