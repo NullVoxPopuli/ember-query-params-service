@@ -30,7 +30,7 @@
   },
   "volta": {
     "node": "20.13.1",
-    "pnpm": "8.15.6"
+    "pnpm": "8.15.8"
   },
   "pnpm": {
     "overrides": {
