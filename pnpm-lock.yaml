@@ -9,7 +9,7 @@ overrides:
   ember-async-data: ^1.0.1
   ember-cli-babel: ^7.26.11
 
-packageExtensionsChecksum: 7d456f94fcb212f3b99ec0fb4a0269f9
+packageExtensionsChecksum: sha256-s5nuxvXE5iowd+ZajwxNliwKXTGdr32qnzxElkh1UWc=
 
 importers:
 
@@ -215,6 +215,9 @@ importers:
       qunit-assertions-extra:
         specifier: ^1.0.3
         version: 1.0.3(qunit@2.19.4)
+    dependenciesMeta:
+      ember-query-params-service:
+        injected: true
     devDependencies:
       '@babel/core':
         specifier: ^7.22.9
@@ -387,9 +390,6 @@ importers:
       webpack:
         specifier: ^5.88.2
         version: 5.88.2
-    dependenciesMeta:
-      ember-query-params-service:
-        injected: true
 
 packages:
 
@@ -2203,6 +2203,7 @@ packages:
 
   acorn-import-assertions@1.9.0:
     resolution: {integrity: sha512-cmMwop9x+8KFhxvKrKfPYmN6/pKTYYHBqLa0DfvVZcKMJWNyWLnaqND7dx/qn66R7ewM1UX5XMaDVP5wlVTaVA==}
+    deprecated: package has been renamed to acorn-import-attributes
     peerDependencies:
       acorn: ^8
 
@@ -5717,6 +5718,7 @@ packages:
 
   lodash.omit@4.5.0:
     resolution: {integrity: sha512-XeqSp49hNGmlkj2EJlfrQFIzQ6lXdNro9sddtQzcJY8QaoC2GO0DT7xaIokHeyM+mIT0mPMlPvkYzg2xCuHdZg==}
+    deprecated: This package is deprecated. Use destructuring assignment syntax instead.
 
   lodash.restparam@3.6.1:
     resolution: {integrity: sha512-L4/arjjuq4noiUJpt3yS6KIKDtJwNe2fIYgMqyYYKoeIfV1iEqvPwhCx23o+R9dzouGihDAPN1dTIRWa7zk8tw==}
@@ -5726,6 +5728,7 @@ packages:
 
   lodash.template@4.5.0:
     resolution: {integrity: sha512-84vYFxIkmidUiFxidA/KjjH9pAycqW+h980j7Fuz5qxRtO9pgB7MDFTdys1N7A5mcucRiDyEq4fusljItR1T/A==}
+    deprecated: This package is deprecated. Use https://socket.dev/npm/package/eta instead.
 
   lodash.templatesettings@4.2.0:
     resolution: {integrity: sha512-stgLz+i3Aa9mZgnjr/O+v9ruKZsPsndy7qPZOchbqk2cnTU1ZaldKK+v7m54WoKIyxiuMZTKT2H81F8BeAc3ZQ==}
