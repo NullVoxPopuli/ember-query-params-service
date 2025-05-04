@@ -6,7 +6,7 @@ settings:
 
 overrides:
   '@glimmer/validator': ^0.94.0
-  ember-async-data: ^1.0.1
+  ember-async-data: ^2.0.0
   ember-cli-babel: ^7.26.11
 
 packageExtensionsChecksum: sha256-s5nuxvXE5iowd+ZajwxNliwKXTGdr32qnzxElkh1UWc=
