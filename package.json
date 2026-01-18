@@ -29,7 +29,7 @@
     "npm": "use pnpm"
   },
   "volta": {
-    "node": "24.12.0",
+    "node": "24.13.0",
     "pnpm": "10.26.2"
   },
   "pnpm": {
