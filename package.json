@@ -1,0 +1,122 @@
+{
+  "name": "ember-query-params-service",
+  "version": "1.0.0",
+  "description": "Prototype Service for managing query params via a service",
+  "keywords": [
+    "ember-addon"
+  ],
+  "repository": "https://github.com/nullvoxpopuli/ember-query-params-service",
+  "license": "MIT",
+  "author": "nullvoxpopuli",
+  "files": [
+    "addon-main.cjs",
+    "dist",
+    "dist-types"
+  ],
+  "scripts": {
+    "build": "concurrently 'npm:build:*'",
+    "build:js": "rollup --config ./rollup.config.mjs",
+    "build:types": "glint --build",
+    "lint": "pnpm -w exec lint",
+    "lint:fix": "pnpm -w exec lint fix",
+    "lint:js": "pnpm -w exec lint js",
+    "lint:js:fix": "pnpm -w exec lint js:fix",
+    "lint:hbs": "pnpm -w exec lint hbs",
+    "lint:hbs:fix": "pnpm -w exec lint hbs:fix",
+    "lint:package": "pnpm publint",
+    "lint:published-types": "attw *.tgz || exit 0",
+    "lint:prettier:fix": "pnpm -w exec lint prettier:fix",
+    "lint:prettier": "pnpm -w exec lint prettier",
+    "lint:types": "glint",
+    "pack": "pnpm pack",
+    "start": "concurrently 'npm:start:*'",
+    "start:js": "rollup --config --watch",
+    "start:types": "glint --build --watch",
+    "test": "echo 'A v2 addon does not have tests, run tests in test-app'"
+  },
+  "dependencies": {
+    "@babel/runtime": "^7.22.6",
+    "@embroider/addon-shim": "^1.8.6",
+    "@embroider/macros": "1.13.0",
+    "qs": "^6.10.3"
+  },
+  "devDependencies": {
+    "@arethetypeswrong/cli": "^0.7.0",
+    "@babel/core": "^7.22.9",
+    "@babel/eslint-parser": "^7.22.9",
+    "@babel/plugin-proposal-class-properties": "^7.18.6",
+    "@babel/plugin-proposal-decorators": "^7.22.7",
+    "@babel/plugin-proposal-object-rest-spread": "^7.20.7",
+    "@babel/plugin-syntax-decorators": "^7.22.5",
+    "@babel/plugin-transform-private-methods": "^7.22.5",
+    "@babel/preset-typescript": "^7.22.5",
+    "@embroider/addon-dev": "3.2.0",
+    "@glimmer/component": "^1.1.2",
+    "@glimmer/tracking": "^1.1.2",
+    "@glint/core": "^1.0.2",
+    "@glint/environment-ember-loose": "^1.0.2",
+    "@glint/template": "^1.0.2",
+    "@nullvoxpopuli/eslint-configs": "^3.2.0",
+    "@rollup/plugin-babel": "^6.0.3",
+    "@rollup/plugin-node-resolve": "^15.1.0",
+    "@rollup/plugin-typescript": "^11.1.2",
+    "@tsconfig/ember": "^3.0.0",
+    "@types/qs": "^6.9.7",
+    "@typescript-eslint/eslint-plugin": "^5.61.0",
+    "@typescript-eslint/parser": "^5.61.0",
+    "concurrently": "^8.2.0",
+    "ember-modifier": "^4.1.0",
+    "ember-source": "~5.1.2",
+    "ember-template-lint": "^5.11.1",
+    "eslint": "^8.45.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-ember": "^11.10.0",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-prettier": "^5.0.0",
+    "prettier": "^2.8.8",
+    "prettier-plugin-ember-template-tag": "^0.3.2",
+    "publint": "^0.1.16",
+    "rollup": "~3.29.0",
+    "rollup-plugin-copy": "^3.4.0",
+    "typescript": "^5.1.6"
+  },
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org"
+  },
+  "ember": {
+    "edition": "octane"
+  },
+  "ember-addon": {
+    "version": 2,
+    "type": "addon",
+    "main": "addon-main.cjs",
+    "app-js": {
+      "./services/query-params.js": "./dist/_app_/services/query-params.js"
+    }
+  },
+  "exports": {
+    ".": {
+      "types": "./dist-types/index.d.ts",
+      "default": "./dist/index.js"
+    },
+    "./*": {
+      "types": "./dist-types/*.d.ts",
+      "default": "./dist/*.js"
+    },
+    "./addon-main": "./addon-main.cjs"
+  },
+  "typesVersions": {
+    "*": {
+      "*": [
+        "dist-types/*"
+      ]
+    }
+  },
+  "volta": {
+    "extends": "../package.json"
+  },
+  "peerDependencies": {
+    "@glimmer/tracking": ">= 1.0.0",
+    "ember-source": "> 3.12.0"
+  }
+}
