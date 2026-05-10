@@ -24,7 +24,7 @@ jobs:
     outputs:
       pending: ${{ steps.set-pending.outputs.pending }}
     steps:
-      - uses: wyvox/action@v1
+      - uses: wyvox/action@v2
         with:
           repo-token: ${{ secrets.GITHUB_TOKEN }}
       - run: pnpm build
@@ -58,7 +58,7 @@ jobs:
     needs: [setup]
     timeout-minutes: 5
     steps:
-      - uses: wyvox/action@v1
+      - uses: wyvox/action@v2
         with:
           repo-token: ${{ secrets.GITHUB_TOKEN }}
       - run: pnpm lint
@@ -71,7 +71,7 @@ jobs:
     timeout-minutes: 5
     if: ${{ fromJSON(needs.setup.outputs.pending).test-app.test.status != 'HIT' }}
     steps:
-      - uses: wyvox/action@v1
+      - uses: wyvox/action@v2
         with:
           repo-token: ${{ secrets.GITHUB_TOKEN }}
       - run: pnpm turbo test --filter test-app
@@ -83,7 +83,7 @@ jobs:
     timeout-minutes: 5
     if: ${{ fromJSON(needs.setup.outputs.pending).test-app.test.status != 'HIT' }}
     steps:
-      - uses: wyvox/action@v1
+      - uses: wyvox/action@v2
         with:
           repo-token: ${{ secrets.GITHUB_TOKEN }}
           pnpm-args: --no-lockfile
@@ -117,7 +117,7 @@ jobs:
           - ember-canary
 
     steps:
-      - uses: wyvox/action@v1
+      - uses: wyvox/action@v2
         with:
           repo-token: ${{ secrets.GITHUB_TOKEN }}
       - run: pnpm build
@@ -147,7 +147,7 @@ jobs:
           - typescript@next
 
     steps:
-      - uses: wyvox/action@v1
+      - uses: wyvox/action@v2
         with:
           repo-token: ${{ secrets.GITHUB_TOKEN }}
       - run: pnpm build
